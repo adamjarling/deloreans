@@ -1,0 +1,104 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const photos = [
+  { src: "/images/carina_lights.jpeg",              alt: t('gallery.alt.1'), span: 2 },
+  { src: "/images/IMG_2606.JPG",                    alt: t('gallery.alt.2'), span: 1 },
+  { src: "/images/zoltan_adam_carina.jpeg",         alt: t('gallery.alt.3'), span: 1 },
+  { src: "/images/zoltan_adam_carina_coctails.jpeg",alt: t('gallery.alt.4'), span: 1 },
+  { src: "/images/IMG_2604.JPG",                    alt: t('gallery.alt.5'), span: 1 },
+];
+---
+
+<section class="gallery" id="photos">
+  <div class="container">
+    <p class="section-label">{t('gallery.label')}</p>
+    <h2 class="section-title">{t('gallery.title')}</h2>
+    <div class="neon-line"></div>
+  </div>
+
+  <div class="gallery__grid">
+    {photos.map((photo) => (
+      <div class={`gallery__item ${photo.span === 2 ? 'gallery__item--wide' : ''}`}>
+        <img src={photo.src} alt={photo.alt} loading="lazy" />
+        <div class="gallery__item-overlay"></div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .gallery {
+    background: var(--bg-alt);
+    padding-bottom: 0;
+  }
+
+  .gallery .container {
+    padding-bottom: 40px;
+  }
+
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-auto-rows: 280px;
+    gap: 3px;
+  }
+
+  .gallery__item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery__item--wide {
+    grid-column: span 2;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(90%) contrast(1.05);
+    transition: filter 0.4s ease, transform 0.5s ease;
+  }
+
+  .gallery__item:hover img {
+    filter: grayscale(20%) contrast(1.1);
+    transform: scale(1.03);
+  }
+
+  /* Neon edge glow on hover */
+  .gallery__item-overlay {
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    pointer-events: none;
+  }
+  .gallery__item:hover .gallery__item-overlay {
+    border-color: rgba(255,20,147,0.4);
+    box-shadow: inset 0 0 30px rgba(255,20,147,0.08);
+  }
+
+  @media (max-width: 700px) {
+    .gallery__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 200px;
+    }
+    .gallery__item--wide {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery__grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 260px;
+    }
+    .gallery__item--wide {
+      grid-column: span 1;
+    }
+  }
+</style>

@@ -1,0 +1,245 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const otherLangs = (Object.entries(languages) as [keyof typeof languages, string][])
+  .filter(([code]) => code !== lang);
+---
+<section class="hero" id="home">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <img
+      src="/images/logo_with_car.jpeg"
+      alt="DeLoreans logo"
+      class="hero__logo"
+    />
+    <p class="hero__tagline">{t('hero.tagline')}</p>
+    <p class="hero__sub">{t('hero.sub')}</p>
+    <div class="hero__cta">
+      <a href="#watch" class="btn btn--primary">{t('hero.cta.watch')}</a>
+      <a href="#contact" class="btn btn--ghost">{t('hero.cta.book')}</a>
+    </div>
+  </div>
+
+  <nav class="hero__nav">
+    <a href="#about">{t('nav.about')}</a>
+    <a href="#watch">{t('nav.watch')}</a>
+    <a href="#photos">{t('nav.photos')}</a>
+    <a href="#contact">{t('nav.contact')}</a>
+    <div class="hero__lang">
+      {otherLangs.map(([code, label]) => (
+        <a href={getRelativeLocaleUrl(code, '/')} class="lang-link">{label}</a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="hero__scroll">
+    <span>{t('hero.scroll')}</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Dark background behind the logo box */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+  }
+
+  /* Subtle radial glow to give depth */
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 55%, rgba(155,48,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 55%, rgba(255,20,147,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hero__logo {
+    width: min(520px, 88vw);
+    border-radius: 12px;
+    filter: drop-shadow(0 0 40px rgba(155,48,255,0.6)) drop-shadow(0 0 80px rgba(255,20,147,0.3));
+    animation: logoPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes logoPulse {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(155,48,255,0.5)) drop-shadow(0 0 60px rgba(255,20,147,0.25)); }
+    50%       { filter: drop-shadow(0 0 55px rgba(155,48,255,0.8)) drop-shadow(0 0 100px rgba(255,20,147,0.45)); }
+  }
+
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    letter-spacing: 0.18em;
+    color: var(--cyan);
+    text-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,212,255,0.5);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .hero__sub {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .btn {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    padding: 12px 32px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn--primary {
+    background: var(--pink);
+    color: var(--white);
+    box-shadow: 0 0 24px rgba(255,20,147,0.5);
+  }
+  .btn--primary:hover {
+    background: #ff40a8;
+    box-shadow: 0 0 40px rgba(255,20,147,0.8);
+    color: var(--white);
+  }
+
+  .btn--ghost {
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    background: transparent;
+  }
+  .btn--ghost:hover {
+    background: rgba(0,212,255,0.12);
+    box-shadow: 0 0 24px rgba(0,212,255,0.3);
+    color: var(--cyan);
+  }
+
+  /* Top nav */
+  .hero__nav {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    z-index: 10;
+    display: flex;
+    gap: 28px;
+  }
+
+  .hero__nav a {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .hero__nav a:hover {
+    color: var(--pink);
+    text-shadow: 0 0 12px var(--pink);
+  }
+
+  /* Scroll indicator */
+  .hero__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+  }
+
+  .hero__scroll span {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--white), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50%       { transform: scaleY(0.6); opacity: 0.8; }
+  }
+
+  .hero__lang {
+    display: flex;
+    gap: 10px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255,255,255,0.15);
+    margin-left: 4px;
+  }
+
+  .lang-link {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-link:hover {
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--cyan);
+  }
+
+  @media (max-width: 600px) {
+    .hero__nav {
+      right: 16px;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+    .hero__lang {
+      padding-left: 10px;
+    }
+  }
+</style>

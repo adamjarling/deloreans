@@ -1,0 +1,142 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const {
+  title = t('meta.title'),
+  description = t('meta.description'),
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/jpeg" href="/images/logo_with_car.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg:         #0A0A0F;
+    --bg-alt:     #0F0F1A;
+    --pink:       #FF1493;
+    --cyan:       #00D4FF;
+    --purple:     #9B30FF;
+    --white:      #FFFFFF;
+    --muted:      rgba(255,255,255,0.55);
+    --border:     rgba(255,20,147,0.25);
+
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'Barlow Condensed', sans-serif;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Scanline grain overlay — applied via ::after on body */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  a {
+    color: var(--cyan);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--pink);
+  }
+
+  section {
+    padding: 80px 24px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  /* Neon glow utilities */
+  .glow-pink  { text-shadow: 0 0 20px var(--pink),  0 0 40px var(--pink); }
+  .glow-cyan  { text-shadow: 0 0 20px var(--cyan),  0 0 40px var(--cyan); }
+  .glow-purple{ text-shadow: 0 0 20px var(--purple), 0 0 40px var(--purple); }
+
+  /* Divider */
+  .neon-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--purple));
+    margin-bottom: 32px;
+    box-shadow: 0 0 12px var(--pink);
+  }
+</style>

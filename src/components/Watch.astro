@@ -1,0 +1,78 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// To switch to YouTube: replace the <video> block with:
+// <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" ...></iframe>
+const useYouTube = true;
+const youTubeId = "waiJKm_FP_g";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="watch" id="watch">
+  <div class="container">
+    <p class="section-label">{t('watch.label')}</p>
+    <h2 class="section-title">{t('watch.title')}</h2>
+    <div class="neon-line"></div>
+
+    <div class="watch__player">
+      {useYouTube && youTubeId ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${youTubeId}`}
+          title="DeLoreans live performance"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      ) : (
+        <video
+          controls
+          preload="metadata"
+          poster="/images/carina_lights.jpeg"
+        >
+          <source src="/video/deloreans_clip.mp4" type="video/mp4" />
+          {t('watch.noVideo')}
+        </video>
+      )}
+    </div>
+
+    <p class="watch__caption">{t('watch.caption')}</p>
+  </div>
+</section>
+
+<style>
+  .watch {
+    background: var(--bg);
+  }
+
+  .watch__player {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow:
+      0 0 40px rgba(155,48,255,0.2),
+      0 0 80px rgba(255,20,147,0.1);
+  }
+
+  .watch__player video,
+  .watch__player iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    background: #000;
+    border: none;
+  }
+
+  .watch__caption {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

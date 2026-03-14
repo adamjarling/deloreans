@@ -1,0 +1,173 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="about" id="about">
+  <div class="container">
+    <div class="about__grid">
+
+      <div class="about__photo-wrap">
+        <img
+          src="/images/carina_lights.jpeg"
+          alt={t('about.photo.alt')}
+          class="about__photo"
+        />
+        <div class="about__photo-glow"></div>
+      </div>
+
+      <div class="about__text">
+        <p class="section-label">{t('about.label')}</p>
+        <h2 class="section-title">{t('about.title')}</h2>
+        <div class="neon-line"></div>
+
+        <p class="about__body">{t('about.p1')}</p>
+
+        <p class="about__body">{t('about.p2')}</p>
+
+        <blockquote class="about__quote">
+          {t('about.quote')}
+        </blockquote>
+
+        <div class="about__members">
+          <div class="member">
+            <div class="member__name">Adam J. Arling</div>
+            <div class="member__role">{t('adam.role')}</div>
+            <p class="member__bio">{t('adam.bio')}</p>
+          </div>
+
+          <div class="member">
+            <div class="member__name">Zoltan 'BZ' Batky</div>
+            <div class="member__role">{t('zoltan.role')}</div>
+            <p class="member__bio">{t('zoltan.bio')}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--bg-alt);
+    position: relative;
+  }
+
+  /* Subtle grid pattern background */
+  .about::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(155,48,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155,48,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    position: relative;
+  }
+
+  .about__photo-wrap {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .about__photo {
+    width: 100%;
+    border-radius: 4px;
+    filter: grayscale(100%) contrast(1.1);
+    transition: filter 0.4s ease;
+  }
+  .about__photo:hover {
+    filter: grayscale(60%) contrast(1.1);
+  }
+
+  /* Pink neon border glow */
+  .about__photo-glow {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,20,147,0.3);
+    border-radius: 4px;
+    box-shadow: inset 0 0 30px rgba(255,20,147,0.08), 0 0 30px rgba(255,20,147,0.15);
+    pointer-events: none;
+  }
+
+  .about__text {
+    padding-top: 8px;
+  }
+
+  .about__body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 20px;
+    line-height: 1.75;
+  }
+
+  .about__body strong {
+    color: var(--cyan);
+    font-weight: 600;
+  }
+
+  .about__quote {
+    border-left: 3px solid var(--pink);
+    padding-left: 20px;
+    margin: 28px 0;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    box-shadow: -3px 0 20px rgba(255,20,147,0.15);
+  }
+
+  .about__members {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+  }
+
+  .member__name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    color: var(--pink);
+    margin-bottom: 2px;
+  }
+
+  .member__role {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .member__bio {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 768px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about__members {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
