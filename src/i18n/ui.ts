@@ -4,7 +4,7 @@ export const languages = {
   hu: 'Magyar',
 };
 
-export const defaultLang = 'en';
+export const defaultLang = 'de';
 
 export const ui = {
   en: {
