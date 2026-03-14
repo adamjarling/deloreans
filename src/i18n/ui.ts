@@ -9,8 +9,8 @@ export const defaultLang = 'en';
 export const ui = {
   en: {
     // Meta
-    'meta.title': 'DeLoreans — Acoustic Time Travel',
-    'meta.description': 'The DeLoreans are an acoustic duo playing 80s rock & pop hits. Acoustic time travel — back to when music was still awesome.',
+    'meta.title': 'The DeLoreans — Acoustic 80s Rock Duo | Vienna, Austria',
+    'meta.description': 'The DeLoreans are a Vienna-based acoustic duo bringing back 80s rock & pop — Bon Jovi, Whitesnake, Bryan Adams and more. Available to book for clubs, pubs, and private events across Austria, Germany, and Hungary.',
 
     // Hero
     'hero.tagline': 'Acoustic Time Travel',
@@ -65,8 +65,8 @@ export const ui = {
 
   de: {
     // Meta
-    'meta.title': 'DeLoreans — Akustische Zeitreise',
-    'meta.description': 'The DeLoreans sind ein akustisches Duo mit 80er-Rock- und Pophits. Akustische Zeitreise — zurück in die Zeit, als Musik noch großartig war.',
+    'meta.title': 'The DeLoreans — Akustisches 80er-Rock-Duo | Wien, Österreich',
+    'meta.description': 'The DeLoreans sind ein akustisches Duo aus Wien mit 80er-Rock- und Pophits — Bon Jovi, Whitesnake, Bryan Adams und mehr. Für Clubs, Pubs und Veranstaltungen in Österreich und Deutschland buchbar.',
 
     // Hero
     'hero.tagline': 'Akustische Zeitreise',
@@ -121,8 +121,8 @@ export const ui = {
 
   hu: {
     // Meta
-    'meta.title': 'DeLoreans — Akusztikus időutazás',
-    'meta.description': 'A DeLoreans egy akusztikus duó, amely 80-as évek rock és pop slágereit játssza. Akusztikus időutazás — vissza, amikor a zene még igazi volt.',
+    'meta.title': 'The DeLoreans — Akusztikus 80-as rock duó | Bécs, Ausztria',
+    'meta.description': 'A DeLoreans egy bécsi akusztikus duó, amely 80-as évek rock és pop slágereit játssza — Bon Jovi, Whitesnake, Bryan Adams és mások. Foglalható klubokba, pubokba és rendezvényekre Ausztriában és Magyarországon.',
 
     // Hero
     'hero.tagline': 'Akusztikus időutazás',
