@@ -232,14 +232,34 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     text-shadow: 0 0 10px var(--cyan);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .hero__nav {
-      right: 16px;
-      gap: 12px;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 20px;
+      background: rgba(10, 10, 15, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero__nav a {
       font-size: 0.85rem;
     }
+
     .hero__lang {
-      padding-left: 10px;
+      border-left: none;
+      padding-left: 0;
+      margin-left: 0;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      justify-content: center;
+      gap: 20px;
     }
   }
 </style>
