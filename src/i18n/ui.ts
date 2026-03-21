@@ -22,6 +22,7 @@ export const ui = {
     // Nav
     'nav.about': 'About',
     'nav.watch': 'Watch',
+    'nav.gigs': 'Gigs',
     'nav.photos': 'Photos',
     'nav.contact': 'Contact',
 
@@ -42,6 +43,14 @@ export const ui = {
     'watch.title': 'Watch Us Play',
     'watch.caption': '"Can\'t Find My Way Home" — Live at Cafe Carina, Vienna · January 2026',
     'watch.noVideo': 'Your browser does not support video playback.',
+
+    // Gigs
+    'gigs.label': 'Live Shows',
+    'gigs.title': 'On the Road',
+    'gigs.upcoming': 'Upcoming',
+    'gigs.past': 'Past Shows',
+    'gigs.location.vienna': 'Vienna, Austria',
+    'gigs.contact': 'Contact us to book',
 
     // Gallery
     'gallery.label': 'Photos',
@@ -78,6 +87,7 @@ export const ui = {
     // Nav
     'nav.about': 'Über uns',
     'nav.watch': 'Videos',
+    'nav.gigs': 'Konzerte',
     'nav.photos': 'Fotos',
     'nav.contact': 'Kontakt',
 
@@ -98,6 +108,14 @@ export const ui = {
     'watch.title': 'Schau uns spielen',
     'watch.caption': '"Can\'t Find My Way Home" – Live im Cafe Carina, Wien · Jänner 2026',
     'watch.noVideo': 'Dein Browser unterstützt die Videowiedergabe leider nicht.',
+
+    // Gigs
+    'gigs.label': 'Live-Konzerte',
+    'gigs.title': 'Auf der Bühne',
+    'gigs.upcoming': 'Bevorstehend',
+    'gigs.past': 'Vergangene Konzerte',
+    'gigs.location.vienna': 'Wien, Österreich',
+    'gigs.contact': 'Jetzt anfragen',
 
     // Gallery
     'gallery.label': 'Fotos',
@@ -134,6 +152,7 @@ export const ui = {
     // Nav
     'nav.about': 'Rólunk',
     'nav.watch': 'Videók',
+    'nav.gigs': 'Koncertek',
     'nav.photos': 'Fotók',
     'nav.contact': 'Kapcsolat',
 
@@ -154,6 +173,14 @@ export const ui = {
     'watch.title': 'Így játszunk mi',
     'watch.caption': '"Can\'t Find My Way Home" – Élőben a Cafe Carina (Bécs) színpadán · 2026 január',
     'watch.noVideo': 'A böngésződ nem támogatja a videólejátszást.',
+
+    // Gigs
+    'gigs.label': 'Élő koncertek',
+    'gigs.title': 'Fellépések',
+    'gigs.upcoming': 'Közelgő',
+    'gigs.past': 'Korábbi koncertek',
+    'gigs.location.vienna': 'Bécs, Ausztria',
+    'gigs.contact': 'Lépj velünk kapcsolatba',
 
     // Gallery
     'gallery.label': 'Fotók',

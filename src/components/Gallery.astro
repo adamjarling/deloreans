@@ -1,32 +1,33 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const photos = [
-  { src: "/images/carina_lights.jpeg",              alt: t('gallery.alt.1'), span: 2 },
-  { src: "/images/IMG_2606.JPG",                    alt: t('gallery.alt.2'), span: 1 },
-  { src: "/images/zoltan_adam_carina.jpeg",         alt: t('gallery.alt.3'), span: 1 },
-  { src: "/images/zoltan_adam_carina_coctails.jpeg",alt: t('gallery.alt.4'), span: 1 },
-  { src: "/images/IMG_2604.JPG",                    alt: t('gallery.alt.5'), span: 1 },
+  { src: "/images/carina_lights.jpeg", alt: t("gallery.alt.1") },
+  { src: "/images/IMG_2606.JPG", alt: t("gallery.alt.2") },
+  { src: "/images/zoltan_adam_carina.jpeg", alt: t("gallery.alt.3") },
+  { src: "/images/IMG_2604.JPG", alt: t("gallery.alt.5") },
 ];
 ---
 
 <section class="gallery" id="photos">
   <div class="container">
-    <p class="section-label">{t('gallery.label')}</p>
-    <h2 class="section-title">{t('gallery.title')}</h2>
+    <p class="section-label">{t("gallery.label")}</p>
+    <h2 class="section-title">{t("gallery.title")}</h2>
     <div class="neon-line"></div>
   </div>
 
   <div class="gallery__grid">
-    {photos.map((photo) => (
-      <div class={`gallery__item ${photo.span === 2 ? 'gallery__item--wide' : ''}`}>
-        <img src={photo.src} alt={photo.alt} loading="lazy" />
-        <div class="gallery__item-overlay"></div>
-      </div>
-    ))}
+    {
+      photos.map((photo) => (
+        <div class="gallery__item">
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+          <div class="gallery__item-overlay" />
+        </div>
+      ))
+    }
   </div>
 </section>
 
@@ -40,20 +41,28 @@ const photos = [
     padding-bottom: 40px;
   }
 
+  /* Desktop: magazine layout
+     [ wide landscape  |  wide  ] [ portrait (tall) ]
+     [ square          | landscape] [ portrait (tall) ] */
   .gallery__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    grid-auto-rows: 280px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 300px 300px;
+    grid-template-areas:
+      "wide    wide     portrait"
+      "sq1     sq2      portrait";
     gap: 3px;
   }
+
+  .gallery__item:nth-child(1) { grid-area: wide; }
+  .gallery__item:nth-child(2) { grid-area: portrait; }
+  .gallery__item:nth-child(3) { grid-area: sq1; }
+  .gallery__item:nth-child(4) { grid-area: sq2; }
 
   .gallery__item {
     position: relative;
     overflow: hidden;
-  }
-
-  .gallery__item--wide {
-    grid-column: span 2;
+    background: var(--bg-alt);
   }
 
   .gallery__item img {
@@ -61,7 +70,9 @@ const photos = [
     height: 100%;
     object-fit: cover;
     filter: grayscale(90%) contrast(1.05);
-    transition: filter 0.4s ease, transform 0.5s ease;
+    transition:
+      filter 0.4s ease,
+      transform 0.5s ease;
   }
 
   .gallery__item:hover img {
@@ -74,31 +85,66 @@ const photos = [
     position: absolute;
     inset: 0;
     border: 1px solid transparent;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
     pointer-events: none;
   }
   .gallery__item:hover .gallery__item-overlay {
-    border-color: rgba(255,20,147,0.4);
-    box-shadow: inset 0 0 30px rgba(255,20,147,0.08);
+    border-color: rgba(255, 20, 147, 0.4);
+    box-shadow: inset 0 0 30px rgba(255, 20, 147, 0.08);
   }
 
-  @media (max-width: 700px) {
+  /* Tablet: compress to 2 equal columns, portrait still spans both rows */
+  @media (max-width: 900px) {
     .gallery__grid {
       grid-template-columns: 1fr 1fr;
-      grid-auto-rows: 200px;
+      grid-template-rows: 240px 240px;
+      grid-template-areas:
+        "wide    portrait"
+        "sq1     portrait";
     }
-    .gallery__item--wide {
-      grid-column: span 2;
+    /* sq2 (4th photo) falls outside the named areas — place it below */
+    .gallery__item:nth-child(4) {
+      grid-area: unset;
+      grid-column: 1 / -1;
+      height: 240px;
     }
   }
 
-  @media (max-width: 480px) {
+  /* Mobile: single column, all photos full width.
+     Portrait photo gets a taller cell to honour its natural ratio. */
+  @media (max-width: 640px) {
     .gallery__grid {
       grid-template-columns: 1fr;
-      grid-auto-rows: 260px;
+      grid-template-rows: unset;
+      grid-template-areas: unset;
     }
-    .gallery__item--wide {
-      grid-column: span 1;
+
+    .gallery__item:nth-child(1),
+    .gallery__item:nth-child(2),
+    .gallery__item:nth-child(3),
+    .gallery__item:nth-child(4) {
+      grid-area: unset;
+      grid-column: unset;
+    }
+
+    /* Landscape photos */
+    .gallery__item:nth-child(1),
+    .gallery__item:nth-child(3),
+    .gallery__item:nth-child(4) {
+      aspect-ratio: 4 / 3;
+      height: unset;
+    }
+
+    /* Portrait photo — full natural height */
+    .gallery__item:nth-child(2) {
+      aspect-ratio: 3 / 4;
+      height: unset;
+    }
+
+    .gallery__item img {
+      height: 100%;
     }
   }
 </style>

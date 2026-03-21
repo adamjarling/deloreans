@@ -1,0 +1,269 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allGigs = [
+  {
+    date: new Date('2026-04-18'),
+    venue: 'Cafe Carina',
+    city: t('gigs.location.vienna'),
+    url: null,
+  },
+  {
+    date: new Date('2026-01-22'),
+    venue: 'Cafe Carina',
+    city: t('gigs.location.vienna'),
+    url: null,
+  },
+];
+
+const now = new Date();
+const upcoming = allGigs.filter(g => g.date >= now);
+const past = allGigs.filter(g => g.date < now);
+
+const fmt = (date: Date) =>
+  new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+
+const fmtDay = (date: Date) =>
+  new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(date);
+---
+
+<section class="gigs" id="gigs">
+  <div class="container">
+    <p class="section-label">{t('gigs.label')}</p>
+    <h2 class="section-title">{t('gigs.title')}</h2>
+    <div class="neon-line"></div>
+
+    {upcoming.length > 0 && (
+      <div class="gigs__block">
+        <h3 class="gigs__sub">{t('gigs.upcoming')}</h3>
+        <ul class="gigs__list gigs__list--upcoming">
+          {upcoming.map(gig => (
+            <li class="gig-card gig-card--upcoming">
+              <div class="gig-card__badge">NEXT SHOW</div>
+              <div class="gig-card__date">
+                <span class="gig-card__day">{fmtDay(gig.date)}</span>
+                <span class="gig-card__full">{fmt(gig.date)}</span>
+              </div>
+              <div class="gig-card__divider" />
+              <div class="gig-card__info">
+                <span class="gig-card__venue">{gig.venue}</span>
+                <span class="gig-card__city">{gig.city}</span>
+              </div>
+              <div class="gig-card__action">
+                <a href="#contact" class="gig-card__cta">{t('gigs.contact')}</a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {past.length > 0 && (
+      <div class="gigs__block">
+        <h3 class="gigs__sub">{t('gigs.past')}</h3>
+        <ul class="gigs__list">
+          {past.map(gig => (
+            <li class="gig-card gig-card--past">
+              <div class="gig-card__date">
+                <span class="gig-card__full">{fmt(gig.date)}</span>
+              </div>
+              <div class="gig-card__divider" />
+              <div class="gig-card__info">
+                <span class="gig-card__venue">{gig.venue}</span>
+                <span class="gig-card__city">{gig.city}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .gigs {
+    background: var(--bg);
+  }
+
+  .gigs__block {
+    margin-bottom: 56px;
+  }
+
+  .gigs__sub {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  .gigs__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── Shared card ── */
+  .gig-card {
+    display: grid;
+    grid-template-columns: auto 1px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 24px 28px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Upcoming card ── */
+  .gig-card--upcoming {
+    border-color: rgba(255, 20, 147, 0.35);
+    background: linear-gradient(
+      135deg,
+      rgba(255,20,147,0.06) 0%,
+      rgba(155,48,255,0.04) 100%
+    );
+    box-shadow:
+      0 0 0 1px rgba(255,20,147,0.1),
+      0 0 40px rgba(255,20,147,0.06);
+  }
+
+  .gig-card--upcoming::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--pink), var(--purple));
+    box-shadow: 0 0 12px var(--pink);
+  }
+
+  .gig-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--pink);
+    text-shadow: 0 0 10px var(--pink);
+    opacity: 0.9;
+  }
+
+  /* ── Past card ── */
+  .gig-card--past {
+    background: transparent;
+    opacity: 0.55;
+  }
+
+  /* ── Date column ── */
+  .gig-card__date {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 180px;
+  }
+
+  .gig-card__day {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .gig-card__full {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .gig-card--past .gig-card__full {
+    font-size: 1.15rem;
+  }
+
+  /* ── Divider ── */
+  .gig-card__divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+
+  /* ── Venue info ── */
+  .gig-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .gig-card__venue {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+  }
+
+  .gig-card--past .gig-card__venue {
+    font-size: 1.1rem;
+  }
+
+  .gig-card__city {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CTA ── */
+  .gig-card__action {
+    margin-left: auto;
+  }
+
+  .gig-card__cta {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    border: 1px solid rgba(0,212,255,0.35);
+    padding: 8px 20px;
+    border-radius: 3px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .gig-card__cta:hover {
+    background: rgba(0,212,255,0.1);
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+    color: var(--cyan);
+  }
+
+  @media (max-width: 640px) {
+    .gig-card {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 20px;
+    }
+
+    .gig-card__divider {
+      display: none;
+    }
+
+    .gig-card__date {
+      min-width: unset;
+    }
+
+    .gig-card__action {
+      margin-left: 0;
+    }
+  }
+</style>
