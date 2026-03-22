@@ -10,12 +10,14 @@ const allGigs = [
     venue: 'Cafe Carina',
     city: t('gigs.location.vienna'),
     url: null,
+    flyer: '/images/delorians_18.04.2026_cafe-carina.jpeg',
   },
   {
     date: new Date('2026-01-22'),
     venue: 'Cafe Carina',
     city: t('gigs.location.vienna'),
     url: null,
+    flyer: '/images/delorians_22.01.2026_cafe-carina.jpeg',
   },
 ];
 
@@ -55,6 +57,11 @@ const fmtDay = (date: Date) =>
               <div class="gig-card__action">
                 <a href="#contact" class="gig-card__cta">{t('gigs.contact')}</a>
               </div>
+              {gig.flyer && (
+                <a href={gig.flyer} target="_blank" rel="noopener" class="gig-card__flyer-link">
+                  <img src={gig.flyer} alt={`${gig.venue} flyer`} class="gig-card__flyer" />
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -75,6 +82,11 @@ const fmtDay = (date: Date) =>
                 <span class="gig-card__venue">{gig.venue}</span>
                 <span class="gig-card__city">{gig.city}</span>
               </div>
+              {gig.flyer && (
+                <a href={gig.flyer} target="_blank" rel="noopener" class="gig-card__flyer-link gig-card__flyer-link--past">
+                  <img src={gig.flyer} alt={`${gig.venue} flyer`} class="gig-card__flyer gig-card__flyer--past" />
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -247,6 +259,38 @@ const fmtDay = (date: Date) =>
     color: var(--cyan);
   }
 
+  /* ── Flyer thumbnail ── */
+  .gig-card__flyer-link {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .gig-card__flyer {
+    display: block;
+    height: 200px;
+    width: auto;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 20, 147, 0.4);
+    box-shadow: 0 0 16px rgba(255, 20, 147, 0.2);
+    transition: box-shadow 0.2s, transform 0.2s;
+    object-fit: cover;
+  }
+
+  .gig-card__flyer-link:hover .gig-card__flyer {
+    box-shadow: 0 0 28px rgba(255, 20, 147, 0.45);
+    transform: scale(1.03);
+  }
+
+  .gig-card__flyer--past {
+    height: 160px;
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+  }
+
+  .gig-card__flyer-link--past:hover .gig-card__flyer--past {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  }
+
   @media (max-width: 640px) {
     .gig-card {
       grid-template-columns: 1fr;
@@ -264,6 +308,14 @@ const fmtDay = (date: Date) =>
 
     .gig-card__action {
       margin-left: 0;
+    }
+
+    .gig-card__flyer {
+      height: 150px;
+    }
+
+    .gig-card__flyer--past {
+      height: 120px;
     }
   }
 </style>
