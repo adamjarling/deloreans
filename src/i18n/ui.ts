@@ -75,12 +75,12 @@ export const ui = {
   de: {
     // Meta
     'meta.title': 'The DeLoreans — Akustisches 80er-Rock-Duo | Wien, Österreich',
-    'meta.description': 'The DeLoreans sind ein akustisches Duo aus Wien mit 80er-Rock- und Pophits — Bon Jovi, Whitesnake, Bryan Adams und mehr. Für Clubs, Pubs und Veranstaltungen in Österreich und Deutschland buchbar.',
+    'meta.description': 'The DeLoreans ist ein akustisches Duo aus Wien mit 80er-Rock- und Pophits — Bon Jovi, Whitesnake, Bryan Adams und mehr. Verfügbar für Buchungen für Clubs, Lokalen und private Veranstaltungen in Österreich, Deutschland und Ungarn.',
 
     // Hero
     'hero.tagline': 'Akustische Zeitreise',
-    'hero.sub': 'Zurück in die Zeit, als Musik noch großartig war',
-    'hero.cta.watch': 'Schau uns spielen',
+    'hero.sub': 'Zurück in die Zeit, wenn Musik noch großartig war',
+    'hero.cta.watch': 'Schau uns Spielen',
     'hero.cta.book': 'Band buchen',
     'hero.scroll': 'Scroll',
 
@@ -101,7 +101,7 @@ export const ui = {
     'adam.role': 'Gitarre & Gesang',
     'adam.bio': 'In Chicago geborener Gitarrist und Bassist. Ehemals bei Urge Overkill, The Last Vegas und Warrior Soul – über 20 Jahre internationale Tourneen, auf der Bühne neben AC/DC, Guns N\' Roses, Mötley Crüe und ZZ Top. Jetzt rockt er Wien.',
     'zoltan.role': 'Gesang & Gitarre',
-    'zoltan.bio': 'Ungarischer Sänger, Musiker und Songwriter mit fast zwanzig Alben in Progressive Metal, Classic Heavy Metal und Symphonic Rock. Ein echter Weltenbürger, der jetzt Wien sein Zuhause nennt.',
+    'zoltan.bio': 'Ungarischer Sänger, Musiker und Songwriter mit fast zwanzig Alben in Progressive Metal, Classic Heavy Metal und Symphonic Rock. Ein echter Weltbürger, der jetzt Wien sein Zuhause nennt.',
 
     // Watch
     'watch.label': 'Live-Auftritt',
@@ -122,15 +122,15 @@ export const ui = {
     'gallery.title': 'Auf der Bühne & Dahinter',
     'gallery.alt.1': 'The DeLoreans live im Cafe Carina, Wien',
     'gallery.alt.2': 'Adam und Zoltan mit Gitarren vor einer Graffiti-Wand',
-    'gallery.alt.3': 'Zoltan und Adam backstage im Cafe Carina',
-    'gallery.alt.4': 'The DeLoreans an der Bar nach dem Konzert',
+    'gallery.alt.3': 'Zoltan und Adam Backstage im Cafe Carina',
+    'gallery.alt.4': 'The DeLoreans in der Bar nach dem Konzert',
     'gallery.alt.5': 'The DeLoreans Live-Auftritt',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
     'contact.title.1': 'Ladet die',
     'contact.title.2': 'Zeitreisenden ein',
-    'contact.body': 'The DeLoreans sind buchbar für Clubs, Pubs, Privatveranstaltungen und Festivals. Melde dich – und lass uns dein Publikum dorthin zurückbringen, wo die Musik noch großartig war.',
+    'contact.body': 'The DeLoreans ist buchbar für Clubs, Pubs, private Veranstaltungen und Festivals. Melde dich – und lass uns dein Publikum dorthin zurückbringen, wo die Musik noch großartig war.',
     'contact.repertoire': 'Repertoire (Auswahl)',
     'contact.more': '& vieles mehr',
     'contact.tagline': 'Akustische Zeitreise',
