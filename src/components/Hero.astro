@@ -78,11 +78,11 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 0 24px;
+    padding: 0 var(--space-4);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: var(--space-4);
   }
 
   .hero__logo {
@@ -104,7 +104,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     color: var(--cyan);
     text-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,212,255,0.5);
     text-transform: uppercase;
-    margin-top: 8px;
+    margin-top: var(--space-2);
   }
 
   .hero__sub {
@@ -118,17 +118,17 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
 
   .hero__cta {
     display: flex;
-    gap: 16px;
+    gap: var(--space-3);
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: var(--space-2);
   }
 
   .btn {
     font-family: var(--font-display);
     font-size: 1.1rem;
     letter-spacing: 0.12em;
-    padding: 12px 32px;
+    padding: var(--space-3) var(--space-5);
     border-radius: 3px;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -160,11 +160,11 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   /* Top nav */
   .hero__nav {
     position: absolute;
-    top: 28px;
-    right: 32px;
+    top: var(--space-5);
+    right: var(--space-5);
     z-index: 10;
     display: flex;
-    gap: 28px;
+    gap: var(--space-5);
   }
 
   .hero__nav a {
@@ -182,14 +182,14 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   /* Scroll indicator */
   .hero__scroll {
     position: absolute;
-    bottom: 32px;
+    bottom: var(--space-5);
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     opacity: 0.4;
   }
 
@@ -213,8 +213,8 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
 
   .hero__lang {
     display: flex;
-    gap: 10px;
-    padding-left: 16px;
+    gap: var(--space-2);
+    padding-left: var(--space-3);
     border-left: 1px solid rgba(255,255,255,0.15);
     margin-left: 4px;
   }
@@ -239,10 +239,10 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
       left: 0;
       right: 0;
       width: 100%;
-      padding: 10px 20px;
+      padding: var(--space-2) var(--space-4);
       flex-wrap: wrap;
       justify-content: center;
-      gap: 6px 20px;
+      gap: var(--space-1) var(--space-4);
       background: rgba(10, 10, 15, 0.88);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
@@ -260,7 +260,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       width: 100%;
       justify-content: center;
-      gap: 20px;
+      gap: var(--space-4);
     }
   }
 </style>

@@ -111,13 +111,13 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   .contact__inner {
     position: relative;
     z-index: 1;
-    padding: 80px 24px 0;
+    padding: var(--space-7) var(--space-4) 0;
   }
 
   .contact__top {
     display: flex;
     justify-content: center;
-    margin-bottom: 64px;
+    margin-bottom: var(--space-6);
   }
 
   .contact__logo {
@@ -128,7 +128,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   .contact__grid {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 64px;
+    gap: var(--space-6);
     align-items: start;
   }
 
@@ -137,19 +137,19 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     font-weight: 300;
     color: rgba(255,255,255,0.75);
     line-height: 1.75;
-    margin-bottom: 36px;
+    margin-bottom: var(--space-5);
   }
 
   .contact__links {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space-4);
   }
 
   .contact__item {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--space-3);
     font-size: 1rem;
     color: var(--cyan);
     transition: color 0.2s;
@@ -170,8 +170,8 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 16px;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
   }
 
   .setlist li {
@@ -180,7 +180,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     letter-spacing: 0.06em;
     color: var(--muted);
     border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding-bottom: 10px;
+    padding-bottom: var(--space-2);
     transition: color 0.2s;
   }
   .setlist li:hover {
@@ -194,9 +194,9 @@ const footerText = t('contact.footer').replace('{year}', String(year));
 
   /* Footer bar */
   .contact__footer {
-    margin-top: 80px;
+    margin-top: var(--space-7);
     border-top: 1px solid var(--border);
-    padding: 28px 0 32px;
+    padding: var(--space-4) 0 var(--space-5);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,13 +207,13 @@ const footerText = t('contact.footer').replace('{year}', String(year));
 
   .contact__social {
     display: flex;
-    gap: 16px;
+    gap: var(--space-3);
   }
 
   .contact__social-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     color: var(--muted);
     font-size: 0.82rem;
     letter-spacing: 0.08em;
@@ -246,11 +246,11 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   @media (max-width: 768px) {
     .contact__grid {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: var(--space-5);
     }
     .contact__footer {
       flex-direction: column;
-      gap: 12px;
+      gap: var(--space-3);
       text-align: center;
     }
   }

@@ -80,6 +80,16 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 
     --font-display: 'Bebas Neue', sans-serif;
     --font-body:    'Barlow Condensed', sans-serif;
+
+    /* Golden ratio spacing scale — Fibonacci: each value ≈ previous × φ (1.618) */
+    --space-1:  5px;   /* micro  */
+    --space-2:  8px;   /* xs     */
+    --space-3: 13px;   /* sm     */
+    --space-4: 21px;   /* md     */
+    --space-5: 34px;   /* lg     */
+    --space-6: 55px;   /* xl     */
+    --space-7: 89px;   /* 2xl    */
+    --space-8: 144px;  /* 3xl    */
   }
 
   *, *::before, *::after {
@@ -132,7 +142,7 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
   }
 
   section {
-    padding: 80px 24px;
+    padding: var(--space-7) var(--space-4);
   }
 
   .container {
@@ -146,7 +156,7 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     letter-spacing: 0.25em;
     color: var(--pink);
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
   }
 
   .section-title {
@@ -155,7 +165,7 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     line-height: 1;
     letter-spacing: 0.03em;
     color: var(--white);
-    margin-bottom: 32px;
+    margin-bottom: var(--space-5);
   }
 
   /* Neon glow utilities */
@@ -168,7 +178,7 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     width: 60px;
     height: 2px;
     background: linear-gradient(90deg, var(--pink), var(--purple));
-    margin-bottom: 32px;
+    margin-bottom: var(--space-5);
     box-shadow: 0 0 12px var(--pink);
   }
 </style>
