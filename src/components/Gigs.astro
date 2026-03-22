@@ -9,7 +9,7 @@ const allGigs = [
     date: new Date('2026-04-18'),
     venue: 'Cafe Carina',
     city: t('gigs.location.vienna'),
-    url: null,
+    url: 'https://www.cafe-carina.at/2020/events/the-drags-deloreans/',
     flyer: '/images/delorians_18.04.2026_cafe-carina.jpeg',
   },
   {
@@ -55,7 +55,11 @@ const fmtDay = (date: Date) =>
                 <span class="gig-card__city">{gig.city}</span>
               </div>
               <div class="gig-card__action">
-                <a href="#contact" class="gig-card__cta">{t('gigs.contact')}</a>
+                <a
+                  href={gig.url ?? '#contact'}
+                  class="gig-card__cta"
+                  {...(gig.url ? { target: '_blank', rel: 'noopener' } : {})}
+                >{gig.url ? t('gigs.tickets') : t('gigs.contact')}</a>
               </div>
               {gig.flyer && (
                 <a href={gig.flyer} target="_blank" rel="noopener" class="gig-card__flyer-link">

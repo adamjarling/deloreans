@@ -9,8 +9,8 @@ export const defaultLang = 'de';
 export const ui = {
   en: {
     // Meta
-    'meta.title': 'The DeLoreans — Acoustic 80s Rock Duo | Vienna, Austria',
-    'meta.description': 'The DeLoreans are a Vienna-based acoustic duo bringing back 80s rock & pop — Bon Jovi, Whitesnake, Bryan Adams and more. Available to book for clubs, pubs, and private events across Austria, Germany, and Hungary.',
+    'meta.title': 'DeLoreans — Acoustic 80s Rock Duo | Vienna, Austria',
+    'meta.description': 'DeLoreans are a Vienna-based acoustic duo bringing back 80s rock & pop — Bon Jovi, Whitesnake, Bryan Adams and more. Available to book for clubs, pubs, and private events across Austria, Germany, and Hungary.',
 
     // Hero
     'hero.tagline': 'Acoustic Time Travel',
@@ -28,7 +28,7 @@ export const ui = {
 
     // About
     'about.label': 'The Band',
-    'about.title': 'The DeLoreans',
+    'about.title': 'DeLoreans',
     'about.p1': 'Two musicians born in the 1970s. One common obsession: the music of the 1980s. After meeting at a jam session in Vienna, Adam and Zoltan realized they shared a deep love for 80s rock — and a burning desire to bring it back, stripped down to two acoustic guitars and a whole lot of soul.',
     'about.p2': 'Classic hits from Bon Jovi, Whitesnake, Bryan Adams, and more — reimagined as if heard by a campfire on the beach. Raw, direct, and unforgettable.',
     'about.quote': '"80s Rock Hits — as if you were listening to it by a campfire on the beach."',
@@ -51,6 +51,7 @@ export const ui = {
     'gigs.past': 'Past Shows',
     'gigs.location.vienna': 'Vienna, Austria',
     'gigs.contact': 'Contact us to book',
+    'gigs.tickets': 'Tickets & Info',
 
     // Gallery
     'gallery.label': 'Photos',
@@ -65,17 +66,17 @@ export const ui = {
     'contact.label': 'Booking & Inquiries',
     'contact.title.1': 'Invite the',
     'contact.title.2': 'Time Travelers',
-    'contact.body': 'The DeLoreans are available to play clubs, pubs, private events, and festivals. Get in touch and let\'s take your audience back to when music was still awesome.',
+    'contact.body': 'DeLoreans are available to play clubs, pubs, private events, and festivals. Get in touch and let\'s take your audience back to when music was still awesome.',
     'contact.repertoire': 'Repertoire Includes',
     'contact.more': '& many more',
     'contact.tagline': 'Acoustic Time Travel',
-    'contact.footer': '© {year} The DeLoreans · Vienna, Austria',
+    'contact.footer': '© {year} DeLoreans · Vienna, Austria',
   },
 
   de: {
     // Meta
-    'meta.title': 'The DeLoreans — Akustisches 80er-Rock-Duo | Wien, Österreich',
-    'meta.description': 'The DeLoreans ist ein akustisches Duo aus Wien mit 80er-Rock- und Pophits — Bon Jovi, Whitesnake, Bryan Adams und mehr. Verfügbar für Buchungen für Clubs, Lokalen und private Veranstaltungen in Österreich, Deutschland und Ungarn.',
+    'meta.title': 'DeLoreans — Akustisches 80er-Rock-Duo | Wien, Österreich',
+    'meta.description': 'DeLoreans ist ein akustisches Duo aus Wien mit 80er-Rock- und Pophits — Bon Jovi, Whitesnake, Bryan Adams und mehr. Verfügbar für Buchungen für Clubs, Lokalen und private Veranstaltungen in Österreich, Deutschland und Ungarn.',
 
     // Hero
     'hero.tagline': 'Akustische Zeitreise',
@@ -93,11 +94,11 @@ export const ui = {
 
     // About
     'about.label': 'Die Band',
-    'about.title': 'The DeLoreans',
+    'about.title': 'DeLoreans',
     'about.p1': 'Zwei Musiker, geboren in den 1970er Jahren. Eine gemeinsame Leidenschaft: die Musik der 1980er. Nach einem Jam-Session-Treffen in Wien erkannten Adam und Zoltan, dass sie eine tiefe Liebe für 80er-Rock teilen – und den brennenden Wunsch, ihn zurückzubringen, reduziert auf zwei Akustikgitarren und jede Menge Seele.',
     'about.p2': 'Klassiker von Bon Jovi, Whitesnake, Bryan Adams und mehr – neu interpretiert, als würde man sie an einem Lagerfeuer am Strand hören. Roh, direkt und unvergesslich.',
     'about.quote': '"80er-Rock-Hits – als hättest du sie an einem Lagerfeuer am Strand gehört."',
-    'about.photo.alt': 'The DeLoreans live im Cafe Carina, Wien',
+    'about.photo.alt': 'DeLoreans live im Cafe Carina, Wien',
     'adam.role': 'Gitarre & Gesang',
     'adam.bio': 'In Chicago geborener Gitarrist und Bassist. Ehemals bei Urge Overkill, The Last Vegas und Warrior Soul – über 20 Jahre internationale Tourneen, auf der Bühne neben AC/DC, Guns N\' Roses, Mötley Crüe und ZZ Top. Jetzt rockt er Wien.',
     'zoltan.role': 'Gesang & Gitarre',
@@ -116,30 +117,31 @@ export const ui = {
     'gigs.past': 'Vergangene Konzerte',
     'gigs.location.vienna': 'Wien, Österreich',
     'gigs.contact': 'Jetzt anfragen',
+    'gigs.tickets': 'Tickets & Info',
 
     // Gallery
     'gallery.label': 'Fotos',
     'gallery.title': 'Auf der Bühne & Dahinter',
-    'gallery.alt.1': 'The DeLoreans live im Cafe Carina, Wien',
+    'gallery.alt.1': 'DeLoreans live im Cafe Carina, Wien',
     'gallery.alt.2': 'Adam und Zoltan mit Gitarren vor einer Graffiti-Wand',
     'gallery.alt.3': 'Zoltan und Adam Backstage im Cafe Carina',
-    'gallery.alt.4': 'The DeLoreans in der Bar nach dem Konzert',
-    'gallery.alt.5': 'The DeLoreans Live-Auftritt',
+    'gallery.alt.4': 'DeLoreans in der Bar nach dem Konzert',
+    'gallery.alt.5': 'DeLoreans Live-Auftritt',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
     'contact.title.1': 'Ladet die',
     'contact.title.2': 'Zeitreisenden ein',
-    'contact.body': 'The DeLoreans ist buchbar für Clubs, Pubs, private Veranstaltungen und Festivals. Melde dich – und lass uns dein Publikum dorthin zurückbringen, wo die Musik noch großartig war.',
+    'contact.body': 'DeLoreans ist buchbar für Clubs, Pubs, private Veranstaltungen und Festivals. Melde dich – und lass uns dein Publikum dorthin zurückbringen, wo die Musik noch großartig war.',
     'contact.repertoire': 'Repertoire (Auswahl)',
     'contact.more': '& vieles mehr',
     'contact.tagline': 'Akustische Zeitreise',
-    'contact.footer': '© {year} The DeLoreans · Wien, Österreich',
+    'contact.footer': '© {year} DeLoreans · Wien, Österreich',
   },
 
   hu: {
     // Meta
-    'meta.title': 'The DeLoreans — Akusztikus 80-as rock duó | Bécs, Ausztria',
+    'meta.title': 'DeLoreans — Akusztikus 80-as rock duó | Bécs, Ausztria',
     'meta.description': 'A DeLoreans egy bécsi akusztikus duó, amely 80-as évek rock és pop slágereit játssza — Bon Jovi, Whitesnake, Bryan Adams és mások. Foglalható klubokba, pubokba és rendezvényekre Ausztriában és Magyarországon.',
 
     // Hero
@@ -158,11 +160,11 @@ export const ui = {
 
     // About
     'about.label': 'A zenekar',
-    'about.title': 'The DeLoreans',
+    'about.title': 'DeLoreans',
     'about.p1': 'Két zenész, akik az 1970-es években születtek, és közös megszállottságuk az 1980-as évek zenéje. Adam és Zoltán egy bécsi jam session-ön találkoztak és azonnal rájöttek, hogy nem csak imádják a 80-as évek rockzenéjét, de arra is vágynak, hogy visszahozzák ezt az időszakot, mindössze két gitárral és sok lélekkel.',
     'about.p2': 'A Bon Jovi, Whitesnake, Bryan Adams és mások klasszikus slágerei – újraálmodva, mintha tábortűz mellett hallanád őket a tengerparton. Nyers, közvetlen és felejthetetlen.',
     'about.quote': '"A 80-as évek rock slágerei – mintha tábortűz mellett hallgatnád a tengerparton."',
-    'about.photo.alt': 'The DeLoreans élőben a Cafe Carina (Bécs) színpadán',
+    'about.photo.alt': 'DeLoreans élőben a Cafe Carina (Bécs) színpadán',
     'adam.role': 'Gitár & Ének',
     'adam.bio': 'Chicagóban született gitáros és basszusgitáros. Az Urge Overkill, The Last Vegas és Warrior Soul tagjaként 20+ éve turnézik világszerte, játszott az AC/DC, Guns N\' Roses, Mötley Crüe és ZZ Top előtt is. Jelenleg Bécs a főhadiszállása.',
     'zoltan.role': 'Ének & Gitár',
@@ -181,6 +183,7 @@ export const ui = {
     'gigs.past': 'Korábbi koncertek',
     'gigs.location.vienna': 'Bécs, Ausztria',
     'gigs.contact': 'Lépj velünk kapcsolatba',
+    'gigs.tickets': 'Jegyek & info',
 
     // Gallery
     'gallery.label': 'Fotók',
@@ -188,18 +191,18 @@ export const ui = {
     'gallery.alt.1': 'A DeLoreans élőben a Cafe Carina (Bécs) színpadán',
     'gallery.alt.2': 'Adam és Zoltán gitárokkal egy graffitis fal előtt',
     'gallery.alt.3': 'Zoltán és Adam a színfalak mögött a Cafe Carinában',
-    'gallery.alt.4': 'The DeLoreans a bárban a show után',
-    'gallery.alt.5': 'The DeLoreans élőben',
+    'gallery.alt.4': 'DeLoreans a bárban a show után',
+    'gallery.alt.5': 'DeLoreans élőben',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',
     'contact.title.1': 'Hívd meg',
     'contact.title.2': 'az időutazókat',
-    'contact.body': 'The DeLoreans elérhető klubokba, pubokba, magánrendezvényekre és fesztiválokra. Vedd fel velünk a kapcsolatot, és mi visszarepítjük a közönségedet abba a korba, amikor a zene még igazi volt.',
+    'contact.body': 'DeLoreans elérhető klubokba, pubokba, magánrendezvényekre és fesztiválokra. Vedd fel velünk a kapcsolatot, és mi visszarepítjük a közönségedet abba a korba, amikor a zene még igazi volt.',
     'contact.repertoire': 'Mit játszunk?',
     'contact.more': 'és még sok más',
     'contact.tagline': 'Akusztikus időutazás',
-    'contact.footer': '© {year} The DeLoreans · Bécs, Ausztria',
+    'contact.footer': '© {year} DeLoreans · Bécs, Ausztria',
   },
 } as const;
 
