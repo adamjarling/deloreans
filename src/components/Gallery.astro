@@ -24,15 +24,114 @@ const photos = [
 
   <div class="gallery__grid">
     {
-      photos.map((photo) => (
-        <div class="gallery__item">
+      photos.map((photo, i) => (
+        <button
+          class="gallery__item"
+          data-index={i}
+          aria-label={`Open photo: ${photo.alt}`}
+        >
           <img src={photo.src} alt={photo.alt} loading="lazy" />
           <div class="gallery__item-overlay" />
-        </div>
+        </button>
       ))
     }
   </div>
 </section>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" aria-modal="true" role="dialog" aria-label="Photo viewer" hidden>
+  <div class="lb__backdrop" id="lb-backdrop"></div>
+
+  <button class="lb__close" id="lb-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <button class="lb__nav lb__nav--prev" id="lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <button class="lb__nav lb__nav--next" id="lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+
+  <div class="lb__frame" id="lb-frame">
+    <img class="lb__img" id="lb-img" src="" alt="" />
+  </div>
+
+  <div class="lb__counter" id="lb-counter"></div>
+</div>
+
+<script>
+  const photos = [
+    { src: "/images/carina_lights.jpeg" },
+    { src: "/images/IMG_2606.JPG" },
+    { src: "/images/zoltan_adam_carina.jpeg" },
+    { src: "/images/IMG_2604.JPG" },
+    { src: "/images/677577381_4316870761974561_207644204347945716_n.jpg" },
+    { src: "/images/673777068_4316870341974603_4229409348003326478_n.jpg" },
+    { src: "/images/zoltan_adam_80s_bg.jpg" },
+  ];
+
+  const lb        = document.getElementById('lb')!;
+  const lbImg     = document.getElementById('lb-img') as HTMLImageElement;
+  const lbCounter = document.getElementById('lb-counter')!;
+  const lbFrame   = document.getElementById('lb-frame')!;
+
+  let current = 0;
+
+  function show(index: number) {
+    current = (index + photos.length) % photos.length;
+    lbImg.src = photos[current].src;
+    lbCounter.textContent = `${current + 1} / ${photos.length}`;
+  }
+
+  function open(index: number) {
+    show(index);
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+    (document.getElementById('lb-close') as HTMLElement).focus();
+  }
+
+  function close() {
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Gallery item clicks
+  document.querySelectorAll<HTMLButtonElement>('.gallery__item').forEach(btn => {
+    btn.addEventListener('click', () => open(Number(btn.dataset.index)));
+  });
+
+  document.getElementById('lb-close')!.addEventListener('click', close);
+  document.getElementById('lb-backdrop')!.addEventListener('click', close);
+  document.getElementById('lb-prev')!.addEventListener('click', () => show(current - 1));
+  document.getElementById('lb-next')!.addEventListener('click', () => show(current + 1));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  lbFrame.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+  lbFrame.addEventListener('touchend', e => {
+    const delta = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > 50) delta < 0 ? show(current + 1) : show(current - 1);
+  }, { passive: true });
+</script>
 
 <style>
   .gallery {
@@ -46,11 +145,6 @@ const photos = [
 
   /*
     Desktop: 3-column magazine layout
-    [ wide (1+2)  | tall (3, spans rows 1-2) ]
-    [ sq1 (4)     | sq2 (5)  | tall (cont.)  ]
-    [ sq3 (6)     | sq4 (7)  | sq5 (blank)   ]
-
-    Actually 7 items, 3 cols:
     Row 1: wide wide tall
     Row 2: sq1  sq2  tall
     Row 3: sq3  sq4  sq5
@@ -78,6 +172,10 @@ const photos = [
     position: relative;
     overflow: hidden;
     background: var(--bg-alt);
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    display: block;
   }
 
   .gallery__item img {
@@ -90,12 +188,18 @@ const photos = [
       transform 0.5s ease;
   }
 
-  .gallery__item:hover img {
+  .gallery__item:hover img,
+  .gallery__item:focus-visible img {
     filter: grayscale(20%) contrast(1.1);
     transform: scale(1.03);
   }
 
-  /* Neon edge glow on hover */
+  .gallery__item:focus-visible {
+    outline: 2px solid var(--pink);
+    outline-offset: -2px;
+  }
+
+  /* Neon edge glow on hover/focus */
   .gallery__item-overlay {
     position: absolute;
     inset: 0;
@@ -105,7 +209,8 @@ const photos = [
       box-shadow 0.3s;
     pointer-events: none;
   }
-  .gallery__item:hover .gallery__item-overlay {
+  .gallery__item:hover .gallery__item-overlay,
+  .gallery__item:focus-visible .gallery__item-overlay {
     border-color: rgba(255, 20, 147, 0.4);
     box-shadow: inset 0 0 30px rgba(255, 20, 147, 0.08);
   }
@@ -141,12 +246,10 @@ const photos = [
       grid-area: unset;
     }
 
-    /* Portrait photo gets taller cell */
     .gallery__item:nth-child(2) {
       aspect-ratio: 3 / 4;
     }
 
-    /* All others landscape */
     .gallery__item:nth-child(1),
     .gallery__item:nth-child(3),
     .gallery__item:nth-child(4),
@@ -159,5 +262,122 @@ const photos = [
     .gallery__item img {
       height: 100%;
     }
+  }
+
+  /* ── Lightbox ── */
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lb[hidden] {
+    display: none;
+  }
+
+  .lb__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Image frame — sits above backdrop */
+  .lb__frame {
+    position: relative;
+    z-index: 1;
+    max-width: min(90vw, 1100px);
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lb__img {
+    display: block;
+    max-width: 100%;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid rgba(255, 20, 147, 0.25);
+    box-shadow:
+      0 0 60px rgba(255, 20, 147, 0.15),
+      0 0 120px rgba(155, 48, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  /* Close button */
+  .lb__close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .lb__close svg { width: 20px; height: 20px; }
+  .lb__close:hover {
+    background: rgba(255, 20, 147, 0.2);
+    border-color: rgba(255, 20, 147, 0.5);
+  }
+
+  /* Prev / next buttons */
+  .lb__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .lb__nav svg { width: 24px; height: 24px; }
+  .lb__nav--prev { left: var(--space-4); }
+  .lb__nav--next { right: var(--space-4); }
+  .lb__nav:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.4);
+  }
+
+  /* Counter */
+  .lb__counter {
+    position: absolute;
+    bottom: var(--space-4);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  /* Tighten nav buttons on small screens */
+  @media (max-width: 640px) {
+    .lb__nav--prev { left: var(--space-3); }
+    .lb__nav--next { right: var(--space-3); }
+    .lb__nav { width: 40px; height: 40px; }
+    .lb__nav svg { width: 20px; height: 20px; }
   }
 </style>
