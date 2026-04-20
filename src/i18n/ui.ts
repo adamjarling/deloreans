@@ -42,6 +42,7 @@ export const ui = {
     'watch.label': 'Live Performance',
     'watch.title': 'Watch Us Play',
     'watch.caption': '"Can\'t Find My Way Home" — Live at Cafe Carina, Vienna · January 2026',
+    'watch.caption2': 'DeLoreans — Live at Cafe Carina, Vienna · April 2026',
     'watch.noVideo': 'Your browser does not support video playback.',
 
     // Gigs
@@ -50,6 +51,7 @@ export const ui = {
     'gigs.upcoming': 'Upcoming',
     'gigs.past': 'Past Shows',
     'gigs.location.vienna': 'Vienna, Austria',
+    'gigs.location.wienerNeustadt': 'Wiener Neustadt, Austria',
     'gigs.contact': 'Contact us to book',
     'gigs.tickets': 'Tickets & Info',
 
@@ -61,6 +63,9 @@ export const ui = {
     'gallery.alt.3': 'Zoltan and Adam backstage at Cafe Carina',
     'gallery.alt.4': 'DeLoreans at the bar after the show',
     'gallery.alt.5': 'DeLoreans live performance',
+    'gallery.alt.6': 'DeLoreans performing live at Cafe Carina, Vienna',
+    'gallery.alt.7': 'DeLoreans on stage at Cafe Carina, Vienna',
+    'gallery.alt.8': 'Adam and Zoltan with 80s-style backdrop',
 
     // Contact
     'contact.label': 'Booking & Inquiries',
@@ -108,6 +113,7 @@ export const ui = {
     'watch.label': 'Live-Auftritt',
     'watch.title': 'Schau uns spielen',
     'watch.caption': '"Can\'t Find My Way Home" – Live im Cafe Carina, Wien · Jänner 2026',
+    'watch.caption2': 'DeLoreans – Live im Cafe Carina, Wien · April 2026',
     'watch.noVideo': 'Dein Browser unterstützt die Videowiedergabe leider nicht.',
 
     // Gigs
@@ -116,6 +122,7 @@ export const ui = {
     'gigs.upcoming': 'Bevorstehend',
     'gigs.past': 'Vergangene Konzerte',
     'gigs.location.vienna': 'Wien, Österreich',
+    'gigs.location.wienerNeustadt': 'Wiener Neustadt, Österreich',
     'gigs.contact': 'Jetzt anfragen',
     'gigs.tickets': 'Tickets & Info',
 
@@ -127,6 +134,9 @@ export const ui = {
     'gallery.alt.3': 'Zoltan und Adam Backstage im Cafe Carina',
     'gallery.alt.4': 'DeLoreans in der Bar nach dem Konzert',
     'gallery.alt.5': 'DeLoreans Live-Auftritt',
+    'gallery.alt.6': 'DeLoreans live im Cafe Carina, Wien',
+    'gallery.alt.7': 'DeLoreans auf der Bühne im Cafe Carina, Wien',
+    'gallery.alt.8': 'Adam und Zoltan vor einem 80er-Jahre-Hintergrund',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
@@ -174,6 +184,7 @@ export const ui = {
     'watch.label': 'A zenekar élőben',
     'watch.title': 'Így játszunk mi',
     'watch.caption': '"Can\'t Find My Way Home" – Élőben a Cafe Carina (Bécs) színpadán · 2026 január',
+    'watch.caption2': 'DeLoreans – Élőben a Cafe Carina (Bécs) színpadán · 2026 április',
     'watch.noVideo': 'A böngésződ nem támogatja a videólejátszást.',
 
     // Gigs
@@ -182,6 +193,7 @@ export const ui = {
     'gigs.upcoming': 'Közelgő',
     'gigs.past': 'Korábbi koncertek',
     'gigs.location.vienna': 'Bécs, Ausztria',
+    'gigs.location.wienerNeustadt': 'Wiener Neustadt, Ausztria',
     'gigs.contact': 'Lépj velünk kapcsolatba',
     'gigs.tickets': 'Jegyek & info',
 
@@ -193,6 +205,9 @@ export const ui = {
     'gallery.alt.3': 'Zoltán és Adam a színfalak mögött a Cafe Carinában',
     'gallery.alt.4': 'DeLoreans a bárban a show után',
     'gallery.alt.5': 'DeLoreans élőben',
+    'gallery.alt.6': 'DeLoreans élőben a Cafe Carina (Bécs) színpadán',
+    'gallery.alt.7': 'DeLoreans a Cafe Carina (Bécs) színpadán',
+    'gallery.alt.8': 'Adam és Zoltán 80-as évekbeli háttér előtt',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',

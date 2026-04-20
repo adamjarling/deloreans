@@ -1,13 +1,13 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
-// To switch to YouTube: replace the <video> block with:
-// <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" ...></iframe>
-const useYouTube = true;
-const youTubeId = "waiJKm_FP_g";
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const videos = [
+  { id: 'waiJKm_FP_g', caption: t('watch.caption') },
+  { id: 'oMSiwV3fe1E', caption: t('watch.caption2') },
+];
 ---
 
 <section class="watch" id="watch">
@@ -16,27 +16,21 @@ const t = useTranslations(lang);
     <h2 class="section-title">{t('watch.title')}</h2>
     <div class="neon-line"></div>
 
-    <div class="watch__player">
-      {useYouTube && youTubeId ? (
-        <iframe
-          src={`https://www.youtube.com/embed/${youTubeId}`}
-          title="DeLoreans live performance"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      ) : (
-        <video
-          controls
-          preload="metadata"
-          poster="/images/carina_lights.jpeg"
-        >
-          <source src="/video/deloreans_clip.mp4" type="video/mp4" />
-          {t('watch.noVideo')}
-        </video>
-      )}
+    <div class="watch__grid">
+      {videos.map(video => (
+        <div class="watch__item">
+          <div class="watch__player">
+            <iframe
+              src={`https://www.youtube.com/embed/${video.id}`}
+              title="DeLoreans live performance"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="watch__caption">{video.caption}</p>
+        </div>
+      ))}
     </div>
-
-    <p class="watch__caption">{t('watch.caption')}</p>
   </div>
 </section>
 
@@ -45,11 +39,15 @@ const t = useTranslations(lang);
     background: var(--bg);
   }
 
+  .watch__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
   .watch__player {
     position: relative;
     width: 100%;
-    max-width: 860px;
-    margin: 0 auto;
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--border);
@@ -58,7 +56,6 @@ const t = useTranslations(lang);
       0 0 80px rgba(255,20,147,0.1);
   }
 
-  .watch__player video,
   .watch__player iframe {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -74,5 +71,11 @@ const t = useTranslations(lang);
     letter-spacing: 0.1em;
     color: var(--muted);
     font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .watch__grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
