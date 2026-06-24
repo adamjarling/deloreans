@@ -52,6 +52,8 @@ export const ui = {
     'gigs.past': 'Past Shows',
     'gigs.location.vienna': 'Vienna, Austria',
     'gigs.location.wienerNeustadt': 'Wiener Neustadt, Austria',
+    'gigs.location.balatonszepezd': 'Balatonszepezd, Hungary',
+    'gigs.location.koveskal': 'Köveskál, Hungary',
     'gigs.contact': 'Contact us to book',
     'gigs.tickets': 'Tickets & Info',
 
@@ -123,6 +125,8 @@ export const ui = {
     'gigs.past': 'Vergangene Konzerte',
     'gigs.location.vienna': 'Wien, Österreich',
     'gigs.location.wienerNeustadt': 'Wiener Neustadt, Österreich',
+    'gigs.location.balatonszepezd': 'Balatonszepezd, Ungarn',
+    'gigs.location.koveskal': 'Köveskál, Ungarn',
     'gigs.contact': 'Jetzt anfragen',
     'gigs.tickets': 'Tickets & Info',
 
@@ -194,6 +198,8 @@ export const ui = {
     'gigs.past': 'Korábbi koncertek',
     'gigs.location.vienna': 'Bécs, Ausztria',
     'gigs.location.wienerNeustadt': 'Wiener Neustadt, Ausztria',
+    'gigs.location.balatonszepezd': 'Balatonszepezd, Magyarország',
+    'gigs.location.koveskal': 'Köveskál, Magyarország',
     'gigs.contact': 'Lépj velünk kapcsolatba',
     'gigs.tickets': 'Jegyek & info',
 
