@@ -57,6 +57,9 @@ export const ui = {
     'gigs.contact': 'Contact us to book',
     'gigs.tickets': 'Tickets & Info',
 
+    // Announcement
+    'announcement.label': 'Next Show',
+
     // Gallery
     'gallery.label': 'Photos',
     'gallery.title': 'On Stage & Off',
@@ -134,6 +137,9 @@ export const ui = {
     'gigs.contact': 'Jetzt anfragen',
     'gigs.tickets': 'Tickets & Info',
 
+    // Announcement
+    'announcement.label': 'Nächste Show',
+
     // Gallery
     'gallery.label': 'Fotos',
     'gallery.title': 'Auf der Bühne & Dahinter',
@@ -210,6 +216,9 @@ export const ui = {
     'gigs.location.koveskal': 'Köveskál, Magyarország',
     'gigs.contact': 'Lépj velünk kapcsolatba',
     'gigs.tickets': 'Jegyek & info',
+
+    // Announcement
+    'announcement.label': 'Következő koncert',
 
     // Gallery
     'gallery.label': 'Fotók',

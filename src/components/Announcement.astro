@@ -1,0 +1,138 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const date = new Date('2026-08-14');
+const fmtDate = new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long' }).format(date);
+---
+
+<div class="announce-wrap">
+  <a
+    href="https://www.facebook.com/events/2219900218832999"
+    target="_blank"
+    rel="noopener"
+    class="announce"
+  >
+    <img
+      src="/images/deloreans_2026-08-14_hungary.jpeg"
+      alt="DeLoreans — Szepezdfürdői Strand show flyer"
+      class="announce__img"
+    />
+    <div class="announce__text">
+      <span class="announce__label">{t('announcement.label')}</span>
+      <span class="announce__detail">
+        {fmtDate} &middot; Szepezdfürdői Strand, {t('gigs.location.balatonszepezd')}
+      </span>
+    </div>
+    <span class="announce__cta">{t('gigs.tickets')} &rarr;</span>
+  </a>
+</div>
+
+<style>
+  .announce-wrap {
+    background: var(--bg);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .announce {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-5);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 20, 147, 0.08) 0%,
+      rgba(155, 48, 255, 0.06) 100%
+    );
+    border: 1px solid rgba(255, 20, 147, 0.3);
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.08);
+    color: var(--white);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .announce:hover {
+    color: var(--white);
+    border-color: rgba(255, 20, 147, 0.55);
+    box-shadow: 0 0 40px rgba(255, 20, 147, 0.18);
+  }
+
+  .announce__img {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    object-position: left center;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 20, 147, 0.4);
+  }
+
+  .announce__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .announce__label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--pink);
+    text-transform: uppercase;
+  }
+
+  .announce__detail {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .announce__cta {
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    padding: var(--space-2) var(--space-4);
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .announce:hover .announce__cta {
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+
+  @media (max-width: 640px) {
+    .announce {
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .announce__text {
+      min-width: 0;
+    }
+
+    .announce__detail {
+      white-space: normal;
+      font-size: 1rem;
+    }
+
+    .announce__cta {
+      margin-left: calc(64px + var(--space-3));
+    }
+  }
+</style>
