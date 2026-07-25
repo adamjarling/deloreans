@@ -12,6 +12,10 @@ const photos = [
   { src: "/images/677577381_4316870761974561_207644204347945716_n.jpg",     alt: t("gallery.alt.6") },
   { src: "/images/673777068_4316870341974603_4229409348003326478_n.jpg",    alt: t("gallery.alt.7") },
   { src: "/images/zoltan_adam_80s_bg.jpg",                                  alt: t("gallery.alt.8") },
+  { src: "/images/deloreans_vocalist_live.jpeg",                            alt: t("gallery.alt.9") },
+  { src: "/images/deloreans_guitar_closeup.jpeg",                           alt: t("gallery.alt.10") },
+  { src: "/images/deloreans_guitarist_live.jpeg",                           alt: t("gallery.alt.11") },
+  { src: "/images/deloreans_drummer_live.jpeg",                             alt: t("gallery.alt.12") },
 ];
 ---
 
@@ -69,15 +73,27 @@ const photos = [
 </div>
 
 <script>
-  const photos = [
-    { src: "/images/carina_lights.jpeg" },
-    { src: "/images/IMG_2606.JPG" },
-    { src: "/images/zoltan_adam_carina.jpeg" },
-    { src: "/images/IMG_2604.JPG" },
-    { src: "/images/677577381_4316870761974561_207644204347945716_n.jpg" },
-    { src: "/images/673777068_4316870341974603_4229409348003326478_n.jpg" },
-    { src: "/images/zoltan_adam_80s_bg.jpg" },
-  ];
+  // Shuffle the gallery items in-place so the grid shows a different
+  // arrangement on every page load. Re-parenting via appendChild moves
+  // each button to a new sibling position, so the existing nth-child
+  // grid-area CSS picks it up automatically — no separate layout logic
+  // needed for the shuffled order.
+  const grid = document.querySelector('.gallery__grid')!;
+  const items = Array.from(grid.querySelectorAll<HTMLButtonElement>('.gallery__item'));
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  items.forEach((item, i) => {
+    item.dataset.index = String(i);
+    grid.appendChild(item);
+  });
+
+  // Derive the lightbox's photo list from the now-shuffled DOM order,
+  // so it always matches what's on screen.
+  const photos = items.map(item => ({
+    src: item.querySelector('img')!.src,
+  }));
 
   const lb        = document.getElementById('lb')!;
   const lbImg     = document.getElementById('lb-img') as HTMLImageElement;
@@ -148,25 +164,33 @@ const photos = [
     Row 1: wide wide tall
     Row 2: sq1  sq2  tall
     Row 3: sq3  sq4  sq5
+    Row 4: sq6  sq7  sq8
+    Row 5: full full full
   */
   .gallery__grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 300px 300px 300px;
+    grid-template-rows: 300px 300px 300px 300px 300px;
     grid-template-areas:
       "wide  wide  tall"
       "sq1   sq2   tall"
-      "sq3   sq4   sq5";
+      "sq3   sq4   sq5"
+      "sq6   sq7   sq8"
+      "full  full  full";
     gap: 3px;
   }
 
-  .gallery__item:nth-child(1) { grid-area: wide; }
-  .gallery__item:nth-child(2) { grid-area: tall; }
-  .gallery__item:nth-child(3) { grid-area: sq1; }
-  .gallery__item:nth-child(4) { grid-area: sq2; }
-  .gallery__item:nth-child(5) { grid-area: sq3; }
-  .gallery__item:nth-child(6) { grid-area: sq4; }
-  .gallery__item:nth-child(7) { grid-area: sq5; }
+  .gallery__item:nth-child(1)  { grid-area: wide; }
+  .gallery__item:nth-child(2)  { grid-area: tall; }
+  .gallery__item:nth-child(3)  { grid-area: sq1; }
+  .gallery__item:nth-child(4)  { grid-area: sq2; }
+  .gallery__item:nth-child(5)  { grid-area: sq3; }
+  .gallery__item:nth-child(6)  { grid-area: sq4; }
+  .gallery__item:nth-child(7)  { grid-area: sq5; }
+  .gallery__item:nth-child(8)  { grid-area: sq6; }
+  .gallery__item:nth-child(9)  { grid-area: sq7; }
+  .gallery__item:nth-child(10) { grid-area: sq8; }
+  .gallery__item:nth-child(11) { grid-area: full; }
 
   .gallery__item {
     position: relative;
@@ -219,12 +243,15 @@ const photos = [
   @media (max-width: 900px) {
     .gallery__grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 240px 240px 240px 240px;
+      grid-template-rows: repeat(7, 240px);
       grid-template-areas:
         "wide  tall"
         "sq1   tall"
         "sq2   sq3"
-        "sq4   sq5";
+        "sq4   sq5"
+        "sq6   sq7"
+        "sq8   sq8"
+        "full  full";
     }
   }
 
@@ -242,7 +269,11 @@ const photos = [
     .gallery__item:nth-child(4),
     .gallery__item:nth-child(5),
     .gallery__item:nth-child(6),
-    .gallery__item:nth-child(7) {
+    .gallery__item:nth-child(7),
+    .gallery__item:nth-child(8),
+    .gallery__item:nth-child(9),
+    .gallery__item:nth-child(10),
+    .gallery__item:nth-child(11) {
       grid-area: unset;
     }
 
@@ -255,7 +286,11 @@ const photos = [
     .gallery__item:nth-child(4),
     .gallery__item:nth-child(5),
     .gallery__item:nth-child(6),
-    .gallery__item:nth-child(7) {
+    .gallery__item:nth-child(7),
+    .gallery__item:nth-child(8),
+    .gallery__item:nth-child(9),
+    .gallery__item:nth-child(10),
+    .gallery__item:nth-child(11) {
       aspect-ratio: 4 / 3;
     }
 

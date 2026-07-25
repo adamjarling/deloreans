@@ -68,6 +68,10 @@ export const ui = {
     'gallery.alt.6': 'DeLoreans performing live at Cafe Carina, Vienna',
     'gallery.alt.7': 'DeLoreans on stage at Cafe Carina, Vienna',
     'gallery.alt.8': 'Adam and Zoltan with 80s-style backdrop',
+    'gallery.alt.9': 'DeLoreans vocalist singing into the mic',
+    'gallery.alt.10': 'Close-up of acoustic guitar fingerpicking',
+    'gallery.alt.11': 'DeLoreans guitarist performing live',
+    'gallery.alt.12': 'Drummer keeping the beat with brushes',
 
     // Contact
     'contact.label': 'Booking & Inquiries',
@@ -141,6 +145,10 @@ export const ui = {
     'gallery.alt.6': 'DeLoreans live im Cafe Carina, Wien',
     'gallery.alt.7': 'DeLoreans auf der Bühne im Cafe Carina, Wien',
     'gallery.alt.8': 'Adam und Zoltan vor einem 80er-Jahre-Hintergrund',
+    'gallery.alt.9': 'DeLoreans-Sänger singt ins Mikrofon',
+    'gallery.alt.10': 'Nahaufnahme von Fingerpicking auf der Akustikgitarre',
+    'gallery.alt.11': 'DeLoreans-Gitarrist live auf der Bühne',
+    'gallery.alt.12': 'Schlagzeuger spielt mit Besen',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
@@ -214,6 +222,10 @@ export const ui = {
     'gallery.alt.6': 'DeLoreans élőben a Cafe Carina (Bécs) színpadán',
     'gallery.alt.7': 'DeLoreans a Cafe Carina (Bécs) színpadán',
     'gallery.alt.8': 'Adam és Zoltán 80-as évekbeli háttér előtt',
+    'gallery.alt.9': 'A DeLoreans énekese a mikrofonba énekel',
+    'gallery.alt.10': 'Közelkép az akusztikus gitáron játszó ujjakról',
+    'gallery.alt.11': 'A DeLoreans gitárosa élőben',
+    'gallery.alt.12': 'Dobos söprűkkel játszik',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',
