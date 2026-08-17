@@ -76,9 +76,9 @@ const photos = [
 <script>
   // Shuffle the gallery items in-place so the grid shows a different
   // arrangement on every page load. Re-parenting via appendChild moves
-  // each button to a new sibling position, so the existing nth-child
-  // grid-area CSS picks it up automatically — no separate layout logic
-  // needed for the shuffled order.
+  // each button to a new sibling position; the CSS column layout fills
+  // top-to-bottom, left-to-right in DOM order, so it picks up the new
+  // order automatically — no separate layout logic needed.
   const grid = document.querySelector('.gallery__grid')!;
   const items = Array.from(grid.querySelectorAll<HTMLButtonElement>('.gallery__item'));
   for (let i = items.length - 1; i > 0; i--) {
@@ -161,38 +161,15 @@ const photos = [
   }
 
   /*
-    Desktop: 3-column magazine layout
-    Row 1: wide wide tall
-    Row 2: sq1  sq2  tall
-    Row 3: sq3  sq4  sq5
-    Row 4: sq6  sq7  sq8
-    Row 5: sq9  full full
+    Masonry via CSS multi-column layout: each photo keeps its natural
+    aspect ratio (no object-fit cropping) and stacks into whichever
+    column it falls into by DOM order. Trades the old hand-tuned
+    wide/tall/hero grid for guaranteed uncropped images at any viewport.
   */
   .gallery__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 300px 300px 300px 300px 300px;
-    grid-template-areas:
-      "wide  wide  tall"
-      "sq1   sq2   tall"
-      "sq3   sq4   sq5"
-      "sq6   sq7   sq8"
-      "sq9   full  full";
-    gap: 3px;
+    column-count: 3;
+    column-gap: 3px;
   }
-
-  .gallery__item:nth-child(1)  { grid-area: wide; }
-  .gallery__item:nth-child(2)  { grid-area: tall; }
-  .gallery__item:nth-child(3)  { grid-area: sq1; }
-  .gallery__item:nth-child(4)  { grid-area: sq2; }
-  .gallery__item:nth-child(5)  { grid-area: sq3; }
-  .gallery__item:nth-child(6)  { grid-area: sq4; }
-  .gallery__item:nth-child(7)  { grid-area: sq5; }
-  .gallery__item:nth-child(8)  { grid-area: sq6; }
-  .gallery__item:nth-child(9)  { grid-area: sq7; }
-  .gallery__item:nth-child(10) { grid-area: sq8; }
-  .gallery__item:nth-child(11) { grid-area: sq9; }
-  .gallery__item:nth-child(12) { grid-area: full; }
 
   .gallery__item {
     position: relative;
@@ -202,12 +179,15 @@ const photos = [
     border: none;
     cursor: pointer;
     display: block;
+    width: 100%;
+    margin-bottom: 3px;
+    break-inside: avoid;
   }
 
   .gallery__item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     filter: grayscale(90%) contrast(1.05);
     transition:
       filter 0.4s ease,
@@ -241,65 +221,17 @@ const photos = [
     box-shadow: inset 0 0 30px rgba(255, 20, 147, 0.08);
   }
 
-  /* Tablet: 2-column, portrait still spans 2 rows */
+  /* Tablet: 2 columns */
   @media (max-width: 900px) {
     .gallery__grid {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(7, 240px);
-      grid-template-areas:
-        "wide  tall"
-        "sq1   tall"
-        "sq2   sq3"
-        "sq4   sq5"
-        "sq6   sq7"
-        "sq8   sq9"
-        "full  full";
+      column-count: 2;
     }
   }
 
-  /* Mobile: single column, all photos full width */
+  /* Mobile: single column, all photos full width at natural height */
   @media (max-width: 640px) {
     .gallery__grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: unset;
-      grid-template-areas: unset;
-    }
-
-    .gallery__item:nth-child(1),
-    .gallery__item:nth-child(2),
-    .gallery__item:nth-child(3),
-    .gallery__item:nth-child(4),
-    .gallery__item:nth-child(5),
-    .gallery__item:nth-child(6),
-    .gallery__item:nth-child(7),
-    .gallery__item:nth-child(8),
-    .gallery__item:nth-child(9),
-    .gallery__item:nth-child(10),
-    .gallery__item:nth-child(11),
-    .gallery__item:nth-child(12) {
-      grid-area: unset;
-    }
-
-    .gallery__item:nth-child(2) {
-      aspect-ratio: 3 / 4;
-    }
-
-    .gallery__item:nth-child(1),
-    .gallery__item:nth-child(3),
-    .gallery__item:nth-child(4),
-    .gallery__item:nth-child(5),
-    .gallery__item:nth-child(6),
-    .gallery__item:nth-child(7),
-    .gallery__item:nth-child(8),
-    .gallery__item:nth-child(9),
-    .gallery__item:nth-child(10),
-    .gallery__item:nth-child(11),
-    .gallery__item:nth-child(12) {
-      aspect-ratio: 4 / 3;
-    }
-
-    .gallery__item img {
-      height: 100%;
+      column-count: 1;
     }
   }
 
