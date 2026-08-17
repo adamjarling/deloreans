@@ -21,7 +21,7 @@ const t = useTranslations(lang);
     {pressPhotos.length > 0 ? (
       <ul class="epk-photos__grid">
         {pressPhotos.map(photo => (
-          <li class={`epk-photo epk-photo--${photo.orientation}`}>
+          <li class="epk-photo">
             <img src={photo.src} alt={t(photo.altKey)} loading="lazy" />
             <div class="epk-photo__meta">
               {photo.credit && (
@@ -51,30 +51,34 @@ const t = useTranslations(lang);
     margin-bottom: var(--space-5);
   }
 
+  /*
+    Masonry via CSS multi-column layout, same approach as the homepage
+    Gallery — each photo keeps its natural aspect ratio (no cropping),
+    which matters more here than on the homepage since these are the
+    files promoters actually download.
+  */
   .epk-photos__grid {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-4);
+    column-count: 2;
+    column-gap: var(--space-4);
   }
 
   .epk-photo {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
     border: 1px solid var(--border);
     border-radius: 4px;
     overflow: hidden;
     background: var(--bg);
-    display: flex;
-    flex-direction: column;
   }
 
   .epk-photo img {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    height: auto;
+    display: block;
     transition: transform 0.4s ease;
   }
-
-  .epk-photo--portrait img { aspect-ratio: 3 / 4; }
 
   .epk-photo:hover img { transform: scale(1.03); }
 
@@ -103,4 +107,10 @@ const t = useTranslations(lang);
     white-space: nowrap;
   }
   .epk-photo__dl:hover { color: var(--pink); }
+
+  @media (max-width: 560px) {
+    .epk-photos__grid {
+      column-count: 1;
+    }
+  }
 </style>

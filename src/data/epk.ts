@@ -69,14 +69,13 @@ export interface PressPhoto {
   altKey: TranslationKey;
   /** Photographer credit line, shown under the image and in the usage note */
   credit: string | null;   // TODO: confirm credits before promoters republish
-  orientation: 'landscape' | 'portrait';
 }
 
 export const pressPhotos: PressPhoto[] = [
-  { src: '/images/zoltan_adam_80s_bg.jpg',        altKey: 'gallery.alt.8', credit: null, orientation: 'landscape' },
-  { src: '/images/zoltan_adam_carina.jpeg',       altKey: 'gallery.alt.3', credit: null, orientation: 'landscape' },
-  { src: '/images/deloreans_vocalist_live.jpeg',  altKey: 'gallery.alt.9', credit: null, orientation: 'portrait' },
-  { src: '/images/deloreans_guitarist_live.jpeg', altKey: 'gallery.alt.11', credit: null, orientation: 'portrait' },
+  { src: '/images/deloreans_balaton_sunset.jpg',        altKey: 'gallery.alt.13', credit: null },
+  { src: '/images/deloreans_promo_2026-02.png',         altKey: 'gallery.alt.16', credit: null },
+  { src: '/images/zoltan_adam_80s_bg.jpg',               altKey: 'gallery.alt.8',  credit: null },
+  { src: '/images/zoltan_adam_carina_coctails.jpeg',    altKey: 'gallery.alt.17', credit: null },
 ];
 
 /* ── Press quotes / reviews ───────────────────────────────── */

@@ -79,6 +79,8 @@ export const ui = {
     'gallery.alt.13': 'Adam and Zoltan with guitars at sunset by Lake Balaton',
     'gallery.alt.14': 'DeLoreans playing an outdoor acoustic set under garden umbrellas',
     'gallery.alt.15': 'Black and white photo of DeLoreans performing for a seated crowd',
+    'gallery.alt.16': 'DeLoreans promo portrait with synthwave neon cityscape backdrop',
+    'gallery.alt.17': 'Adam and Zoltan throwing rock hand signs at the bar',
 
     // Contact
     'contact.label': 'Booking & Inquiries',
@@ -262,6 +264,8 @@ export const ui = {
     'gallery.alt.13': 'Adam und Zoltan mit Gitarren bei Sonnenuntergang am Balaton',
     'gallery.alt.14': 'DeLoreans spielen ein akustisches Set im Freien unter Gartenschirmen',
     'gallery.alt.15': 'Schwarz-Weiß-Foto von DeLoreans live vor sitzendem Publikum',
+    'gallery.alt.16': 'DeLoreans-Promoporträt vor einer Synthwave-Neon-Skyline',
+    'gallery.alt.17': 'Adam und Zoltan zeigen Rockerzeichen an der Bar',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
@@ -445,6 +449,8 @@ export const ui = {
     'gallery.alt.13': 'Adam és Zoltán gitárokkal naplementében a Balaton partján',
     'gallery.alt.14': 'A DeLoreans akusztikus koncertje a szabadban, kerti napernyők alatt',
     'gallery.alt.15': 'Fekete-fehér fotó a DeLoreansról, amint ülő közönség előtt játszanak',
+    'gallery.alt.16': 'DeLoreans promóciós portré szintetikus neon városkép háttérrel',
+    'gallery.alt.17': 'Adam és Zoltán rocker kézjelet mutat a bárnál',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',
