@@ -1,0 +1,124 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { videos } from '../../data/videos';
+import { audio } from '../../data/epk';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-media" id="media">
+  <div class="container">
+    <p class="section-label">{t('epk.media.label')}</p>
+    <h2 class="section-title">{t('epk.media.title')}</h2>
+    <div class="neon-line"></div>
+
+    <h3 class="epk-media__kicker">{t('epk.media.watch')}</h3>
+    <div class="epk-media__grid">
+      {videos.map(video => (
+        <figure class="epk-media__item">
+          <div class="epk-media__frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+              title={t(video.captionKey)}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <figcaption>{t(video.captionKey)}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <h3 class="epk-media__kicker epk-media__kicker--spaced">{t('epk.media.listen')}</h3>
+    {audio.length > 0 ? (
+      <ul class="epk-media__audio">
+        {audio.map(track => (
+          <li>
+            <span class="epk-media__track">{track.title}</span>
+            <audio controls preload="none" src={track.src}></audio>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="epk-media__note">{t('epk.media.audioPending')}</p>
+    )}
+  </div>
+</section>
+
+<style>
+  .epk-media { background: var(--bg); }
+
+  .epk-media__kicker {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: var(--space-4);
+  }
+
+  .epk-media__kicker--spaced { margin-top: var(--space-6); }
+
+  .epk-media__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .epk-media__item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-alt);
+  }
+
+  .epk-media__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+  }
+
+  .epk-media__frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .epk-media__item figcaption {
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .epk-media__audio {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .epk-media__audio li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+  }
+
+  .epk-media__track {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+  }
+
+  .epk-media__note {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+</style>

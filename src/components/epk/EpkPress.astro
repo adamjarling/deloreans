@@ -1,0 +1,67 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { quotes } from '../../data/epk';
+import Pending from './Pending.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-press" id="press">
+  <div class="container">
+    <p class="section-label">{t('epk.press.label')}</p>
+    <h2 class="section-title">{t('epk.press.title')}</h2>
+    <div class="neon-line"></div>
+
+    {quotes.length > 0 ? (
+      <ul class="epk-press__list">
+        {quotes.map(quote => (
+          <li class="epk-quote">
+            <blockquote>{t(quote.textKey)}</blockquote>
+            <cite>
+              {quote.url
+                ? <a href={quote.url} target="_blank" rel="noopener">{quote.source}</a>
+                : quote.source}
+            </cite>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <Pending note="Add reviews or venue testimonials to quotes[] in src/data/epk.ts, with the quote text under a new key in ui.ts" />
+    )}
+  </div>
+</section>
+
+<style>
+  .epk-press { background: var(--bg-alt); }
+
+  .epk-press__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .epk-quote {
+    border-left: 3px solid var(--pink);
+    padding: var(--space-2) var(--space-4);
+    box-shadow: -3px 0 20px rgba(255,20,147,0.12);
+  }
+
+  .epk-quote blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: var(--space-3);
+  }
+
+  .epk-quote cite {
+    font-family: var(--font-display);
+    font-style: normal;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+</style>

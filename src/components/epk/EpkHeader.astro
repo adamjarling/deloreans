@@ -1,0 +1,137 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { facts } from '../../data/epk';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-header" id="top">
+  <div class="container">
+    <p class="section-label">{t('epk.label')}</p>
+    <h1 class="epk-header__title glow-pink">DeLoreans</h1>
+    <div class="neon-line"></div>
+
+    <p class="epk-header__pitch">{t('epk.pitch')}</p>
+
+    <div class="epk-header__cta">
+      <a href="#downloads" class="epk-btn epk-btn--primary">{t('epk.cta.download')}</a>
+      <a href="#booking" class="epk-btn epk-btn--ghost">{t('epk.cta.book')}</a>
+    </div>
+
+    <dl class="epk-facts">
+      {facts.map(fact => (
+        <div class="epk-facts__item">
+          <dt>{t(fact.labelKey)}</dt>
+          <dd>{fact.valueKey ? t(fact.valueKey) : fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .epk-header {
+    background: var(--bg);
+    position: relative;
+    padding-top: var(--space-6);
+    overflow: hidden;
+  }
+
+  .epk-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 0%, rgba(155,48,255,0.16) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 10%, rgba(255,20,147,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .epk-header .container { position: relative; }
+
+  .epk-header__title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 11vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-4);
+  }
+
+  .epk-header__pitch {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.82);
+    max-width: 62ch;
+    margin-bottom: var(--space-5);
+  }
+
+  .epk-header__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .epk-btn {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+
+  .epk-btn--primary {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: var(--white);
+    box-shadow: 0 0 24px rgba(255,20,147,0.35);
+  }
+  .epk-btn--primary:hover {
+    color: var(--white);
+    box-shadow: 0 0 40px rgba(255,20,147,0.55);
+  }
+
+  .epk-btn--ghost {
+    color: var(--cyan);
+    border: 1px solid rgba(0,212,255,0.4);
+  }
+  .epk-btn--ghost:hover {
+    background: rgba(0,212,255,0.1);
+    color: var(--cyan);
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  }
+
+  /* ── Quick facts strip ── */
+  .epk-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .epk-facts__item {
+    background: var(--bg-alt);
+    padding: var(--space-4);
+  }
+
+  .epk-facts__item dt {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: var(--space-1);
+  }
+
+  .epk-facts__item dd {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+</style>

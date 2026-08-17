@@ -1,0 +1,109 @@
+---
+/**
+ * Sticky utility bar for the EPK. Unlike the homepage's Hero nav (which is
+ * anchor-based and part of the hero), this stays pinned so a promoter can jump
+ * between sections while scrolling a long document.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { languages } from '../../i18n/ui';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const otherLangs = (Object.entries(languages) as [keyof typeof languages, string][])
+  .filter(([code]) => code !== lang);
+
+const sections = [
+  { href: '#bio',       label: t('epk.bio.label') },
+  { href: '#media',     label: t('epk.media.label') },
+  { href: '#photos',    label: t('epk.photos.label') },
+  { href: '#live',      label: t('epk.live.label') },
+  { href: '#tech',      label: t('epk.tech.label') },
+  { href: '#downloads', label: t('epk.dl.label') },
+  { href: '#booking',   label: t('epk.contact.label') },
+];
+---
+<header class="epk-nav">
+  <div class="epk-nav__inner">
+    <a href={getRelativeLocaleUrl(lang, '/')} class="epk-nav__back">
+      <span aria-hidden="true">←</span> {t('epk.nav.back')}
+    </a>
+
+    <nav class="epk-nav__links" aria-label={t('epk.label')}>
+      {sections.map(s => <a href={s.href}>{s.label}</a>)}
+    </nav>
+
+    <div class="epk-nav__lang">
+      {otherLangs.map(([code, label]) => (
+        <a href={getRelativeLocaleUrl(code, '/epk')}>{label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style>
+  .epk-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .epk-nav__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .epk-nav__back {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .epk-nav__back:hover { color: var(--cyan); }
+
+  .epk-nav__links {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+
+  .epk-nav__links a {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .epk-nav__links a:hover { color: var(--pink); }
+
+  .epk-nav__lang {
+    display: flex;
+    gap: var(--space-3);
+    padding-left: var(--space-4);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .epk-nav__lang a {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .epk-nav__lang a:hover { color: var(--cyan); }
+
+  @media (max-width: 860px) {
+    .epk-nav__links { display: none; }
+    .epk-nav__lang { margin-left: auto; border-left: none; padding-left: 0; }
+  }
+</style>

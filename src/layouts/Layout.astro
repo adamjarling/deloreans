@@ -17,6 +17,16 @@ const {
 const siteUrl = 'https://deloreans.at';
 const ogImage = `${siteUrl}/images/logo_with_car.jpeg`;
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+
+/*
+ * hreflang alternates are derived from the current path rather than hardcoded,
+ * so every page (not just the homepage) points at its own translations.
+ * '/en/epk/' → '/epk/' → prefixed per locale, with 'de' unprefixed because
+ * astro.config sets prefixDefaultLocale: false.
+ */
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(en|hu)(?=\/|$)/, '') || '/';
+const localeUrl = (code: string) =>
+  `${siteUrl}${code === 'de' ? '' : `/${code}`}${pathWithoutLocale}`;
 ---
 
 <!doctype html>
@@ -35,10 +45,10 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- hreflang -->
-    <link rel="alternate" hreflang="de" href={`${siteUrl}/`} />
-    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
-    <link rel="alternate" hreflang="hu" href={`${siteUrl}/hu/`} />
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+    <link rel="alternate" hreflang="de" href={localeUrl('de')} />
+    <link rel="alternate" hreflang="en" href={localeUrl('en')} />
+    <link rel="alternate" hreflang="hu" href={localeUrl('hu')} />
+    <link rel="alternate" hreflang="x-default" href={localeUrl('de')} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

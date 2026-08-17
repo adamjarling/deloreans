@@ -1,0 +1,132 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { contact, social } from '../../data/epk';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const year = new Date().getFullYear();
+const footerText = t('contact.footer').replace('{year}', String(year));
+
+const activeSocial = social.filter(s => s.url);
+---
+<section class="epk-contact" id="booking">
+  <div class="container">
+    <p class="section-label">{t('epk.contact.label')}</p>
+    <h2 class="section-title">{t('epk.contact.title')}</h2>
+    <div class="neon-line"></div>
+
+    <p class="epk-contact__body">{t('epk.contact.body')}</p>
+
+    <ul class="epk-contact__links">
+      <li>
+        <span class="epk-contact__icon" aria-hidden="true">✉</span>
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      </li>
+      {contact.phone && (
+        <li>
+          <span class="epk-contact__icon" aria-hidden="true">☎</span>
+          <a href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a>
+        </li>
+      )}
+      <li>
+        <span class="epk-contact__icon" aria-hidden="true">🌐</span>
+        <a href={contact.website}>{contact.website.replace('https://', '')}</a>
+      </li>
+      <li>
+        <span class="epk-contact__icon" aria-hidden="true">📍</span>
+        <span>{contact.city}</span>
+      </li>
+    </ul>
+
+    {activeSocial.length > 0 && (
+      <div class="epk-contact__social">
+        <p class="epk-contact__social-label">{t('epk.contact.follow')}</p>
+        <ul>
+          {activeSocial.map(item => (
+            <li><a href={item.url!} target="_blank" rel="noopener">{item.name}</a></li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <p class="epk-contact__footer">{footerText}</p>
+  </div>
+</section>
+
+<style>
+  .epk-contact {
+    background: var(--bg);
+    position: relative;
+  }
+
+  .epk-contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(155,48,255,0.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .epk-contact .container { position: relative; }
+
+  .epk-contact__body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.82);
+    max-width: 62ch;
+    margin-bottom: var(--space-5);
+  }
+
+  .epk-contact__links {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .epk-contact__links li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+
+  .epk-contact__icon { opacity: 0.7; }
+
+  .epk-contact__social-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: var(--space-3);
+  }
+
+  .epk-contact__social ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .epk-contact__social a {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .epk-contact__footer {
+    margin-top: var(--space-7);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+</style>

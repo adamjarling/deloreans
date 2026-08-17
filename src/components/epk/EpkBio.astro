@@ -1,0 +1,113 @@
+---
+/**
+ * Bios are offered at two lengths because that's what press actually asks for:
+ * a one-paragraph blurb for listings, and a fuller version for features.
+ * Each block is individually copyable.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-bio" id="bio">
+  <div class="container">
+    <p class="section-label">{t('epk.bio.label')}</p>
+    <h2 class="section-title">{t('epk.bio.title')}</h2>
+    <div class="neon-line"></div>
+    <p class="epk-bio__reprint">{t('epk.bio.reprint')}</p>
+
+    <div class="epk-bio__block">
+      <h3 class="epk-bio__kicker">{t('epk.bio.shortLabel')}</h3>
+      <p class="epk-bio__text">{t('epk.bio.short')}</p>
+    </div>
+
+    <div class="epk-bio__block">
+      <h3 class="epk-bio__kicker">{t('epk.bio.longLabel')}</h3>
+      <p class="epk-bio__text">{t('epk.bio.long.p1')}</p>
+      <p class="epk-bio__text">{t('epk.bio.long.p2')}</p>
+    </div>
+
+    <div class="epk-bio__block">
+      <h3 class="epk-bio__kicker">{t('epk.bio.membersLabel')}</h3>
+      <div class="epk-bio__members">
+        <div class="epk-member">
+          <div class="epk-member__name">Adam J. Arling</div>
+          <div class="epk-member__role">{t('adam.role')}</div>
+          <p class="epk-member__bio">{t('adam.bio')}</p>
+        </div>
+        <div class="epk-member">
+          <div class="epk-member__name">Zoltan 'BZ' Batky</div>
+          <div class="epk-member__role">{t('zoltan.role')}</div>
+          <p class="epk-member__bio">{t('zoltan.bio')}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .epk-bio { background: var(--bg-alt); }
+
+  .epk-bio__reprint {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: var(--space-5);
+  }
+
+  .epk-bio__block {
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .epk-bio__kicker {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: var(--space-3);
+  }
+
+  .epk-bio__text {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    max-width: 72ch;
+    margin-bottom: var(--space-3);
+  }
+
+  .epk-bio__members {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .epk-member__name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: var(--pink);
+  }
+
+  .epk-member__role {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: var(--space-2);
+  }
+
+  .epk-member__bio {
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    .epk-bio__members { grid-template-columns: 1fr; }
+  }
+</style>

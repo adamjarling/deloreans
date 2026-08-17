@@ -1,0 +1,70 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { techSpec } from '../../data/epk';
+import Pending from './Pending.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-tech" id="tech">
+  <div class="container">
+    <p class="section-label">{t('epk.tech.label')}</p>
+    <h2 class="section-title">{t('epk.tech.title')}</h2>
+    <div class="neon-line"></div>
+
+    <dl class="epk-tech__list">
+      {techSpec.map(item => (
+        <div class="epk-tech__row">
+          <dt>{t(item.labelKey)}</dt>
+          <dd>{t(item.valueKey)}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="epk-tech__pending">
+      <Pending note="Confirm every value above with Adam & Zoltan, then delete this marker. A stage plot image belongs in /public/press/ and can be linked from here." />
+    </div>
+  </div>
+</section>
+
+<style>
+  .epk-tech { background: var(--bg); }
+
+  .epk-tech__list {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .epk-tech__row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .epk-tech__row:last-child { border-bottom: none; }
+  .epk-tech__row:nth-child(odd) { background: rgba(255,255,255,0.015); }
+
+  .epk-tech__row dt {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .epk-tech__row dd {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+
+  .epk-tech__pending { margin-top: var(--space-4); }
+
+  @media (max-width: 640px) {
+    .epk-tech__row { grid-template-columns: 1fr; gap: var(--space-1); }
+  }
+</style>

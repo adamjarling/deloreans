@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EpkNav from '../components/epk/EpkNav.astro';
+import EpkHeader from '../components/epk/EpkHeader.astro';
+import EpkBio from '../components/epk/EpkBio.astro';
+import EpkMedia from '../components/epk/EpkMedia.astro';
+import EpkPhotos from '../components/epk/EpkPhotos.astro';
+import EpkLive from '../components/epk/EpkLive.astro';
+import EpkPress from '../components/epk/EpkPress.astro';
+import EpkTech from '../components/epk/EpkTech.astro';
+import EpkDownloads from '../components/epk/EpkDownloads.astro';
+import EpkContact from '../components/epk/EpkContact.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title={t('epk.meta.title')} description={t('epk.meta.description')}>
+  <EpkNav />
+  <EpkHeader />
+  <EpkBio />
+  <EpkMedia />
+  <EpkPhotos />
+  <EpkLive />
+  <EpkPress />
+  <EpkTech />
+  <EpkDownloads />
+  <EpkContact />
+</Layout>

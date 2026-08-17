@@ -33,6 +33,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     <a href="#gigs">{t('nav.gigs')}</a>
     <a href="#photos">{t('nav.photos')}</a>
     <a href="#contact">{t('nav.contact')}</a>
+    <a href={getRelativeLocaleUrl(lang, '/epk')}>{t('nav.epk')}</a>
     <div class="hero__lang">
       {otherLangs.map(([code, label]) => (
         <a href={getRelativeLocaleUrl(code, '/')} class="lang-link">{label}</a>

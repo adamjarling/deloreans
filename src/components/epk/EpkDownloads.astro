@@ -1,0 +1,98 @@
+---
+/**
+ * Each asset renders as a link once its file exists in /public/press/ and the
+ * href is filled in — until then it renders as a disabled "coming soon" card,
+ * so the layout is final and only the data changes.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { downloads } from '../../data/epk';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-dl" id="downloads">
+  <div class="container">
+    <p class="section-label">{t('epk.dl.label')}</p>
+    <h2 class="section-title">{t('epk.dl.title')}</h2>
+    <div class="neon-line"></div>
+
+    <ul class="epk-dl__grid">
+      {downloads.map(item => {
+        const Tag = item.href ? 'a' : 'div';
+        return (
+          <li>
+            <Tag
+              class:list={['epk-dl__card', !item.href && 'epk-dl__card--soon']}
+              {...(item.href ? { href: item.href, download: true } : {})}
+            >
+              <span class="epk-dl__name">{t(item.labelKey)}</span>
+              <span class="epk-dl__desc">{t(item.descKey)}</span>
+              <span class="epk-dl__action">
+                {item.href ? `↓ ${t('epk.photos.download')}` : t('epk.dl.soon')}
+              </span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .epk-dl { background: var(--bg-alt); }
+
+  .epk-dl__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .epk-dl__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: 100%;
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    transition: all 0.2s;
+  }
+
+  a.epk-dl__card:hover {
+    border-color: rgba(0,212,255,0.5);
+    box-shadow: 0 0 24px rgba(0,212,255,0.15);
+  }
+
+  .epk-dl__card--soon {
+    opacity: 0.45;
+    border-style: dashed;
+  }
+
+  .epk-dl__name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+  }
+
+  .epk-dl__desc {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .epk-dl__action {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .epk-dl__card--soon .epk-dl__action { color: var(--muted); }
+</style>

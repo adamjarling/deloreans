@@ -1,0 +1,106 @@
+---
+/**
+ * Press photos differ from the homepage Gallery in one important way: every
+ * image is a direct download with an explicit usage licence and credit line,
+ * and they are NOT desaturated — press needs the file as shot.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { pressPhotos } from '../../data/epk';
+import Pending from './Pending.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="epk-photos" id="photos">
+  <div class="container">
+    <p class="section-label">{t('epk.photos.label')}</p>
+    <h2 class="section-title">{t('epk.photos.title')}</h2>
+    <div class="neon-line"></div>
+    <p class="epk-photos__usage">{t('epk.photos.usage')}</p>
+
+    {pressPhotos.length > 0 ? (
+      <ul class="epk-photos__grid">
+        {pressPhotos.map(photo => (
+          <li class={`epk-photo epk-photo--${photo.orientation}`}>
+            <img src={photo.src} alt={t(photo.altKey)} loading="lazy" />
+            <div class="epk-photo__meta">
+              {photo.credit && (
+                <span class="epk-photo__credit">{t('epk.photos.credit')}: {photo.credit}</span>
+              )}
+              <a href={photo.src} download class="epk-photo__dl">
+                ↓ {t('epk.photos.download')}
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <Pending note="Add image paths to pressPhotos[] in src/data/epk.ts" />
+    )}
+  </div>
+</section>
+
+<style>
+  .epk-photos { background: var(--bg-alt); }
+
+  .epk-photos__usage {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 70ch;
+    margin-bottom: var(--space-5);
+  }
+
+  .epk-photos__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .epk-photo {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .epk-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .epk-photo--portrait img { aspect-ratio: 3 / 4; }
+
+  .epk-photo:hover img { transform: scale(1.03); }
+
+  .epk-photo__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .epk-photo__credit {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .epk-photo__dl {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+  .epk-photo__dl:hover { color: var(--pink); }
+</style>

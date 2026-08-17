@@ -1,13 +1,9 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { videos } from '../data/videos';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const videos = [
-  { id: 'waiJKm_FP_g', caption: t('watch.caption') },
-  { id: 'oMSiwV3fe1E', caption: t('watch.caption2') },
-];
 ---
 
 <section class="watch" id="watch">
@@ -27,7 +23,7 @@ const videos = [
               allowfullscreen
             ></iframe>
           </div>
-          <p class="watch__caption">{video.caption}</p>
+          <p class="watch__caption">{t(video.captionKey)}</p>
         </div>
       ))}
     </div>
@@ -41,7 +37,7 @@ const videos = [
 
   .watch__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--space-5);
   }
 
@@ -73,9 +69,4 @@ const videos = [
     font-style: italic;
   }
 
-  @media (max-width: 768px) {
-    .watch__grid {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>

@@ -1,57 +1,13 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { upcomingGigs, pastGigs } from '../data/gigs';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const allGigs = [
-  {
-    date: new Date('2026-01-22'),
-    venue: 'Cafe Carina',
-    city: t('gigs.location.vienna'),
-    url: null,
-    flyer: '/images/delorians_22.01.2026_cafe-carina.jpeg',
-  },
-  {
-    date: new Date('2026-04-18'),
-    venue: 'Cafe Carina',
-    city: t('gigs.location.vienna'),
-    url: 'https://www.cafe-carina.at/2020/events/the-drags-deloreans/',
-    flyer: '/images/delorians_18.04.2026_cafe-carina.jpeg',
-  },
-  {
-    date: new Date('2026-05-23'),
-    venue: 'Club Quattro',
-    city: t('gigs.location.vienna'),
-    url: null,
-    flyer: null,
-  },
-  {
-    date: new Date('2026-06-27'),
-    venue: 'Cafe Stadler',
-    city: t('gigs.location.wienerNeustadt'),
-    url: null,
-    flyer: null,
-  },
-  {
-    date: new Date('2026-08-14'),
-    venue: 'Szepezdfürdői Strand',
-    city: t('gigs.location.balatonszepezd'),
-    url: 'https://www.facebook.com/events/2219900218832999',
-    flyer: null,
-  },
-  {
-    date: new Date('2026-08-15'),
-    venue: 'Pálffy Winery',
-    city: t('gigs.location.koveskal'),
-    url: null,
-    flyer: null,
-  },
-];
-
 const now = new Date();
-const upcoming = allGigs.filter(g => g.date >= now);
-const past = allGigs.filter(g => g.date < now);
+const upcoming = upcomingGigs(now);
+const past = [...pastGigs(now)].reverse(); // most recent show first
 
 const fmt = (date: Date) =>
   new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
@@ -80,7 +36,7 @@ const fmtDay = (date: Date) =>
               <div class="gig-card__divider" />
               <div class="gig-card__info">
                 <span class="gig-card__venue">{gig.venue}</span>
-                <span class="gig-card__city">{gig.city}</span>
+                <span class="gig-card__city">{t(gig.cityKey)}</span>
               </div>
               <div class="gig-card__action">
                 <a
@@ -112,7 +68,7 @@ const fmtDay = (date: Date) =>
               <div class="gig-card__divider" />
               <div class="gig-card__info">
                 <span class="gig-card__venue">{gig.venue}</span>
-                <span class="gig-card__city">{gig.city}</span>
+                <span class="gig-card__city">{t(gig.cityKey)}</span>
               </div>
               {gig.flyer && (
                 <a href={gig.flyer} target="_blank" rel="noopener" class="gig-card__flyer-link gig-card__flyer-link--past">
