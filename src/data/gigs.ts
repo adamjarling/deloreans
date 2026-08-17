@@ -34,28 +34,29 @@ export const gigs: Gig[] = [
     venue: 'Club Quattro',
     cityKey: 'gigs.location.vienna',
     url: null,
-    flyer: null,
+    flyer: '/images/deloreans_2026-05-23_quattro.jpeg',
   },
   {
     date: new Date('2026-06-27'),
     venue: 'Cafe Stadler',
     cityKey: 'gigs.location.wienerNeustadt',
     url: null,
-    flyer: null,
+    flyer: '/images/deloreans_2026-06-27_cafe-stadler.jpeg',
   },
   {
     date: new Date('2026-08-14'),
     venue: 'Szepezdfürdői Strand',
     cityKey: 'gigs.location.balatonszepezd',
     url: 'https://www.facebook.com/events/2219900218832999',
-    flyer: null,
+    // Combined flyer promotes both the 08-14 and 08-15 Hungary dates together.
+    flyer: '/images/deloreans_hungary_2026.jpg',
   },
   {
     date: new Date('2026-08-15'),
     venue: 'Pálffy Winery',
     cityKey: 'gigs.location.koveskal',
     url: null,
-    flyer: null,
+    flyer: '/images/deloreans_hungary_2026.jpg',
   },
 ];
 
