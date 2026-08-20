@@ -24,6 +24,7 @@ export const ui = {
     'nav.watch': 'Watch',
     'nav.gigs': 'Gigs',
     'nav.photos': 'Photos',
+    'nav.songs': 'Songs',
     'nav.contact': 'Contact',
 
     // About
@@ -45,6 +46,16 @@ export const ui = {
     'watch.caption2': 'DeLoreans — Live at Cafe Carina, Vienna · April 2026',
     'watch.caption3': 'DeLoreans — Live at Szepezdfürdői Strand, Balatonszepezd · August 2026',
     'watch.noVideo': 'Your browser does not support video playback.',
+
+
+    // Songs
+    'songs.label': 'What We Play',
+    'songs.title': 'The Catalog',
+    'songs.body': 'Classics from the 80s and beyond — reimagined acoustically for two guitars and two voices. Got a request? Just ask.',
+    'songs.stat.songs': 'Songs',
+    'songs.stat.artists': 'Artists',
+    'songs.featured': 'Highlights',
+    'songs.all': 'Full Catalog',
 
     // Gigs
     'gigs.label': 'Live Shows',
@@ -209,6 +220,7 @@ export const ui = {
     'nav.watch': 'Videos',
     'nav.gigs': 'Konzerte',
     'nav.photos': 'Fotos',
+    'nav.songs': 'Songs',
     'nav.contact': 'Kontakt',
 
     // About
@@ -230,6 +242,16 @@ export const ui = {
     'watch.caption2': 'DeLoreans – Live im Cafe Carina, Wien · April 2026',
     'watch.caption3': 'DeLoreans – Live am Szepezdfürdői Strand, Balatonszepezd · August 2026',
     'watch.noVideo': 'Dein Browser unterstützt die Videowiedergabe leider nicht.',
+
+
+    // Songs
+    'songs.label': 'Was wir spielen',
+    'songs.title': 'Das Repertoire',
+    'songs.body': 'Klassiker aus den 80ern und darüber hinaus — akustisch neu interpretiert für zwei Gitarren und zwei Stimmen. Ein Wunschsong? Fragt einfach.',
+    'songs.stat.songs': 'Songs',
+    'songs.stat.artists': 'Bands & Künstler',
+    'songs.featured': 'Highlights',
+    'songs.all': 'Alle Songs',
 
     // Gigs
     'gigs.label': 'Live-Konzerte',
@@ -394,6 +416,7 @@ export const ui = {
     'nav.watch': 'Videók',
     'nav.gigs': 'Koncertek',
     'nav.photos': 'Fotók',
+    'nav.songs': 'Dalok',
     'nav.contact': 'Kapcsolat',
 
     // About
@@ -415,6 +438,16 @@ export const ui = {
     'watch.caption2': 'DeLoreans – Élőben a Cafe Carina (Bécs) színpadán · 2026 április',
     'watch.caption3': 'DeLoreans – Élőben a Szepezdfürdői Strandon, Balatonszepezden · 2026 augusztus',
     'watch.noVideo': 'A böngésződ nem támogatja a videólejátszást.',
+
+
+    // Songs
+    'songs.label': 'Amit játszunk',
+    'songs.title': 'A repertoár',
+    'songs.body': 'Klasszikusok a 80-as évekből és azon túl — akusztikusan újragondolva két gitárra és két hangra. Van kívánságod? Csak szólj.',
+    'songs.stat.songs': 'Dal',
+    'songs.stat.artists': 'Előadó',
+    'songs.featured': 'Kiemelt előadók',
+    'songs.all': 'Teljes repertoár',
 
     // Gigs
     'gigs.label': 'Élő koncertek',

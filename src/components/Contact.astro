@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { headliners } from '../data/songs';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -40,14 +41,8 @@ const footerText = t('contact.footer').replace('{year}', String(year));
         <div class="contact__repertoire">
           <p class="section-label">{t('contact.repertoire')}</p>
           <ul class="setlist">
-            <li>Bon Jovi</li>
-            <li>Whitesnake</li>
-            <li>Bryan Adams</li>
-            <li>Guns N' Roses</li>
-            <li>AC/DC</li>
-            <li>The Eagles</li>
-            <li>Blind Faith</li>
-            <li>{t('contact.more')}</li>
+            {headliners.map((artist) => <li>{artist}</li>)}
+            <li><a href="#songs" class="setlist__more">{t('contact.more')}</a></li>
           </ul>
         </div>
 
@@ -133,9 +128,9 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   }
 
   .contact__body {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.75);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
     line-height: 1.75;
     margin-bottom: var(--space-5);
   }
@@ -150,7 +145,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     display: flex;
     align-items: flex-start;
     gap: var(--space-3);
-    font-size: 1rem;
+    font-size: 1.12rem;
     color: var(--cyan);
     transition: color 0.2s;
   }
@@ -176,7 +171,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
 
   .setlist li {
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     letter-spacing: 0.06em;
     color: var(--muted);
     border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -189,7 +184,18 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   }
   .setlist li:last-child {
     border-bottom: none;
+  }
+
+  .setlist__more {
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
     color: var(--pink);
+    transition: text-shadow 0.2s;
+  }
+  .setlist__more:hover {
+    color: var(--pink);
+    text-shadow: 0 0 12px var(--pink);
   }
 
   /* Footer bar */
@@ -200,7 +206,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--muted);
     letter-spacing: 0.08em;
   }
@@ -215,7 +221,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     align-items: center;
     gap: var(--space-2);
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     letter-spacing: 0.08em;
     transition: color 0.2s;
   }
@@ -239,7 +245,7 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     font-family: var(--font-display);
     letter-spacing: 0.2em;
     color: var(--pink);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     text-shadow: 0 0 10px rgba(255,20,147,0.4);
   }
 

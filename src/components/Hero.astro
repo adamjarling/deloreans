@@ -13,23 +13,50 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   <div class="hero__bg"></div>
   <div class="hero__overlay"></div>
 
-  <div class="hero__content">
-    <img
-      src="/images/logo_with_car.jpeg"
-      alt="DeLoreans logo"
-      class="hero__logo"
-    />
-    <p class="hero__tagline">{t('hero.tagline')}</p>
-    <p class="hero__sub">{t('hero.sub')}</p>
-    <div class="hero__cta">
-      <a href="#watch" class="btn btn--primary">{t('hero.cta.watch')}</a>
-      <a href="#contact" class="btn btn--ghost">{t('hero.cta.book')}</a>
+  <div class="hero__inner">
+    <!--
+      Split layout rather than a background image: the promo shot is portrait 2:3,
+      so full-bleed `cover` would upscale a 1024px-wide source ~1.9x on a desktop
+      monitor AND force body text on top of a busy neon photo. Beside it instead,
+      the photo renders near native size and every word sits on flat --bg.
+    -->
+    <figure class="hero__media">
+      <picture>
+        <source srcset="/images/deloreans_promo_2026-02.webp" type="image/webp" />
+        <img
+          src="/images/deloreans_promo_2026-02.jpg"
+          alt={t('gallery.alt.16')}
+          class="hero__photo"
+          width="1024"
+          height="1536"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div class="hero__media-frame"></div>
+    </figure>
+
+    <div class="hero__content">
+      <img
+        src="/images/logo_cropped.png"
+        alt="DeLoreans"
+        class="hero__wordmark"
+        width="753"
+        height="302"
+      />
+      <h1 class="hero__tagline">{t('hero.tagline')}</h1>
+      <p class="hero__sub">{t('hero.sub')}</p>
+      <div class="hero__cta">
+        <a href="#watch" class="btn btn--primary">{t('hero.cta.watch')}</a>
+        <a href="#contact" class="btn btn--ghost">{t('hero.cta.book')}</a>
+      </div>
     </div>
   </div>
 
   <nav class="hero__nav">
     <a href="#about">{t('nav.about')}</a>
     <a href="#watch">{t('nav.watch')}</a>
+    <a href="#songs">{t('nav.songs')}</a>
     <a href="#gigs">{t('nav.gigs')}</a>
     <a href="#photos">{t('nav.photos')}</a>
     <a href="#contact">{t('nav.contact')}</a>
@@ -52,13 +79,12 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     position: relative;
     min-height: 100svh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: var(--space-8) var(--space-4) var(--space-7);
   }
 
-  /* Dark background behind the logo box */
   .hero__bg {
     position: absolute;
     inset: 0;
@@ -70,65 +96,107 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 60% at 50% 55%, rgba(155,48,255,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 40% at 50% 55%, rgba(255,20,147,0.12) 0%, transparent 60%);
+      radial-gradient(ellipse 70% 60% at 40% 50%, rgba(155,48,255,0.20) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 40% 50%, rgba(255,20,147,0.13) 0%, transparent 60%);
     pointer-events: none;
   }
 
-  .hero__content {
+  .hero__inner {
     position: relative;
     z-index: 2;
-    text-align: center;
-    padding: 0 var(--space-4);
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  /* ── Photo ── */
+  .hero__media {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__photo {
+    width: auto;
+    max-width: 100%;
+    /* Uncropped on desktop — the frame takes the photo's own 2:3 aspect. */
+    max-height: min(74svh, 720px);
+    height: auto;
+    border-radius: 6px;
+    box-shadow:
+      0 0 0 1px rgba(255,20,147,0.30),
+      0 0 50px rgba(155,48,255,0.35),
+      0 0 90px rgba(255,20,147,0.18);
+  }
+
+  .hero__media-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    box-shadow: inset 0 0 40px rgba(255,20,147,0.10);
+    pointer-events: none;
+  }
+
+  /* ── Text column ── */
+  .hero__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
     gap: var(--space-4);
   }
 
-  .hero__logo {
-    width: min(520px, 88vw);
-    border-radius: 12px;
-    filter: drop-shadow(0 0 40px rgba(155,48,255,0.6)) drop-shadow(0 0 80px rgba(255,20,147,0.3));
+  .hero__wordmark {
+    width: min(420px, 100%);
+    height: auto;
+    filter: drop-shadow(0 0 26px rgba(155,48,255,0.55)) drop-shadow(0 0 50px rgba(255,20,147,0.28));
     animation: logoPulse 4s ease-in-out infinite;
   }
 
   @keyframes logoPulse {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(155,48,255,0.5)) drop-shadow(0 0 60px rgba(255,20,147,0.25)); }
-    50%       { filter: drop-shadow(0 0 55px rgba(155,48,255,0.8)) drop-shadow(0 0 100px rgba(255,20,147,0.45)); }
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(155,48,255,0.45)) drop-shadow(0 0 40px rgba(255,20,147,0.22)); }
+    50%      { filter: drop-shadow(0 0 38px rgba(155,48,255,0.75)) drop-shadow(0 0 70px rgba(255,20,147,0.42)); }
   }
 
   .hero__tagline {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 5vw, 3rem);
-    letter-spacing: 0.18em;
+    font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0.1em;
     color: var(--cyan);
-    text-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,212,255,0.5);
+    /* Tighter than the old 20px/40px glow — a wide halo softens glyph edges,
+       which is exactly what hurts readability for older eyes. */
+    text-shadow: 0 0 12px rgba(0,212,255,0.70), 0 0 34px rgba(0,212,255,0.35);
     text-transform: uppercase;
-    margin-top: var(--space-2);
   }
 
   .hero__sub {
     font-family: var(--font-body);
-    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
-    font-weight: 300;
-    letter-spacing: 0.2em;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 400;
+    /* Tracking aids short all-caps labels but hurts word recognition in a
+       sentence — dialled back from 0.2em, and no longer uppercase. */
+    letter-spacing: 0.04em;
+    line-height: 1.5;
     color: var(--muted);
-    text-transform: uppercase;
+    max-width: 34ch;
   }
 
   .hero__cta {
     display: flex;
     gap: var(--space-3);
     flex-wrap: wrap;
-    justify-content: center;
     margin-top: var(--space-2);
   }
 
   .btn {
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
     padding: var(--space-3) var(--space-5);
     border-radius: 3px;
     transition: all 0.2s ease;
@@ -165,13 +233,14 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     right: var(--space-5);
     z-index: 10;
     display: flex;
+    align-items: center;
     gap: var(--space-5);
   }
 
   .hero__nav a {
     font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: 0.15em;
+    font-size: 1.15rem;
+    letter-spacing: 0.13em;
     color: var(--muted);
     transition: color 0.2s;
   }
@@ -183,7 +252,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   /* Scroll indicator */
   .hero__scroll {
     position: absolute;
-    bottom: var(--space-5);
+    bottom: var(--space-4);
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -191,25 +260,25 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     flex-direction: column;
     align-items: center;
     gap: var(--space-2);
-    opacity: 0.4;
+    color: var(--muted-dim);
   }
 
   .hero__scroll span {
     font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    font-size: 0.9rem;
+    letter-spacing: 0.28em;
   }
 
   .hero__scroll-line {
     width: 1px;
-    height: 40px;
+    height: 34px;
     background: linear-gradient(to bottom, var(--white), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
 
   @keyframes scrollPulse {
     0%, 100% { transform: scaleY(1); opacity: 0.4; }
-    50%       { transform: scaleY(0.6); opacity: 0.8; }
+    50%      { transform: scaleY(0.6); opacity: 0.8; }
   }
 
   .hero__lang {
@@ -222,8 +291,8 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
 
   .lang-link {
     font-family: var(--font-display);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
     color: var(--muted);
     transition: color 0.2s;
     text-transform: uppercase;
@@ -232,6 +301,48 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   .lang-link:hover {
     color: var(--cyan);
     text-shadow: 0 0 10px var(--cyan);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__wordmark,
+    .hero__scroll-line {
+      animation: none;
+    }
+  }
+
+  /* ── Stack below the split breakpoint ── */
+  @media (max-width: 900px) {
+    .hero {
+      padding-top: calc(var(--space-8) + var(--space-4));
+    }
+
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      justify-items: center;
+    }
+
+    .hero__content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero__sub {
+      max-width: 40ch;
+    }
+
+    .hero__cta {
+      justify-content: center;
+    }
+
+    /* Crop rather than scale: a full-height 2:3 photo would push the CTAs
+       off-screen. 34% keeps both faces in frame. */
+    .hero__photo {
+      width: min(430px, 100%);
+      max-height: 46svh;
+      object-fit: cover;
+      object-position: center 34%;
+    }
   }
 
   @media (max-width: 640px) {
@@ -250,7 +361,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     }
 
     .hero__nav a {
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .hero__lang {
@@ -262,6 +373,10 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
       width: 100%;
       justify-content: center;
       gap: var(--space-4);
+    }
+
+    .hero__scroll {
+      display: none;
     }
   }
 </style>

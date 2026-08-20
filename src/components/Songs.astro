@@ -1,0 +1,194 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { songs, songCount, artistCount, artistsByCount } from '../data/songs';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+/*
+ * "Featured" is derived, not curated: any artist with more than one song in the
+ * catalog. That keeps this block honest as songs are added or dropped — the old
+ * hardcoded repertoire list had drifted to include bands they don't play.
+ */
+const featured = artistsByCount.filter((a) => a.count > 1);
+const rest = artistsByCount.filter((a) => a.count === 1);
+---
+<section class="songs" id="songs">
+  <div class="container">
+    <p class="section-label">{t('songs.label')}</p>
+    <h2 class="section-title">{t('songs.title')}</h2>
+    <div class="neon-line"></div>
+    <p class="songs__body">{t('songs.body')}</p>
+
+    <div class="songs__stats">
+      <div class="stat">
+        <span class="stat__num">{songCount}</span>
+        <span class="stat__label">{t('songs.stat.songs')}</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">{artistCount}</span>
+        <span class="stat__label">{t('songs.stat.artists')}</span>
+      </div>
+    </div>
+
+    <h3 class="songs__sub">{t('songs.featured')}</h3>
+    <ul class="chips">
+      {featured.map(({ artist, count }) => (
+        <li class="chip chip--featured">
+          {artist}<span class="chip__count">{count}</span>
+        </li>
+      ))}
+      {rest.map(({ artist }) => (
+        <li class="chip">{artist}</li>
+      ))}
+    </ul>
+
+    <h3 class="songs__sub">{t('songs.all')}</h3>
+    <ul class="catalog">
+      {songs.map((s) => (
+        <li class="catalog__item">
+          <span class="catalog__title">{s.title}</span>
+          <span class="catalog__artist">{s.artist}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .songs {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .songs__body {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.75;
+    max-width: 62ch;
+    margin-bottom: var(--space-5);
+  }
+
+  /* ── Stats ── */
+  .songs__stats {
+    display: flex;
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat__num {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    line-height: 1;
+    color: var(--cyan);
+    text-shadow: 0 0 14px rgba(0,212,255,0.55);
+  }
+
+  .stat__label {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: var(--space-1);
+  }
+
+  .songs__sub {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: var(--space-4);
+  }
+
+  /* ── Artist chips ── */
+  .chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .chip {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 999px;
+    padding: var(--space-1) var(--space-4);
+    white-space: nowrap;
+  }
+
+  /* Artists with more than one song get the neon treatment. */
+  .chip--featured {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1.3rem;
+    color: var(--white);
+    border-color: rgba(255,20,147,0.45);
+    background: rgba(255,20,147,0.07);
+    box-shadow: 0 0 18px rgba(255,20,147,0.12);
+  }
+
+  .chip__count {
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    color: var(--pink);
+    background: rgba(255,20,147,0.16);
+    border-radius: 999px;
+    min-width: 22px;
+    padding: 0 6px;
+    text-align: center;
+  }
+
+  /* ── Full catalog ── */
+  .catalog {
+    list-style: none;
+    columns: 3;
+    column-gap: var(--space-6);
+  }
+
+  .catalog__item {
+    /* Keep a title and its artist from splitting across a column boundary. */
+    break-inside: avoid;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .catalog__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .catalog__artist {
+    display: block;
+    font-size: 1rem;
+    color: var(--cyan);
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 900px) {
+    .catalog { columns: 2; }
+  }
+
+  @media (max-width: 560px) {
+    .catalog { columns: 1; }
+    .songs__stats { gap: var(--space-5); }
+  }
+</style>
