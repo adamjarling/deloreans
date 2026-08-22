@@ -6,7 +6,12 @@ import EpkBio from '../components/epk/EpkBio.astro';
 import EpkMedia from '../components/epk/EpkMedia.astro';
 import EpkPhotos from '../components/epk/EpkPhotos.astro';
 import EpkLive from '../components/epk/EpkLive.astro';
-import EpkPress from '../components/epk/EpkPress.astro';
+/*
+ * TODO(epk): re-enable <EpkPress /> once `quotes[]` in src/data/epk.ts
+ * holds real reviews, venue testimonials, or promoter quotes. Until then
+ * the section renders nothing but a "Content pending" placeholder.
+ */
+// import EpkPress from '../components/epk/EpkPress.astro';
 import EpkTech from '../components/epk/EpkTech.astro';
 import EpkDownloads from '../components/epk/EpkDownloads.astro';
 import EpkContact from '../components/epk/EpkContact.astro';
@@ -22,7 +27,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
   <EpkMedia />
   <EpkPhotos />
   <EpkLive />
-  <EpkPress />
+  {/* <EpkPress /> — see TODO(epk) above */}
   <EpkTech />
   <EpkDownloads />
   <EpkContact />

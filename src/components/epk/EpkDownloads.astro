@@ -9,6 +9,15 @@ import { downloads } from '../../data/epk';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+/*
+ * TODO(epk): assets with no file yet (the one-sheet and rider PDFs, which are
+ * Adam's to produce) are hidden rather than shown as "Coming soon" cards. Drop
+ * the PDFs in /public/press/ and fill in `href` in src/data/epk.ts — each card
+ * reappears on its own. The disabled-card rendering below is kept deliberately
+ * so nothing breaks if a null slips back in.
+ */
+const available = downloads.filter(d => d.href);
 ---
 <section class="epk-dl" id="downloads">
   <div class="container">
@@ -17,7 +26,7 @@ const t = useTranslations(lang);
     <div class="neon-line"></div>
 
     <ul class="epk-dl__grid">
-      {downloads.map(item => {
+      {available.map(item => {
         const Tag = item.href ? 'a' : 'div';
         return (
           <li>

@@ -1,7 +1,17 @@
 ---
+/*
+ * TODO(epk): the values in ui.ts ('epk.tech.*.value') still need confirming
+ * with Adam & Zoltan — a promoter will plan a stage against them. The unused
+ * 'epk.tech.note' key ("Draft values — confirm with the band before printing")
+ * is already translated in all three languages if a soft caveat is ever wanted
+ * on the page. A stage plot image belongs in /public/press/ and can be linked
+ * from this section.
+ *
+ * Note: this must stay a frontmatter comment. An HTML comment in the template
+ * ships to the browser; only `---` frontmatter and {/* … *\/} are stripped.
+ */
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { techSpec } from '../../data/epk';
-import Pending from './Pending.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -20,10 +30,6 @@ const t = useTranslations(lang);
         </div>
       ))}
     </dl>
-
-    <div class="epk-tech__pending">
-      <Pending note="Confirm every value above with Adam & Zoltan, then delete this marker. A stage plot image belongs in /public/press/ and can be linked from here." />
-    </div>
   </div>
 </section>
 
