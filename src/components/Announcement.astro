@@ -1,34 +1,47 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { upcomingGigs } from '../data/gigs';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const date = new Date('2026-08-14');
-const fmtDate = new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long' }).format(date);
+/*
+ * Derived from the gig data rather than hardcoded. The previous version pinned
+ * this banner to a specific show, so once that date passed the homepage kept
+ * advertising a gig that had already happened.
+ */
+const next = upcomingGigs()[0] ?? null;
+const fmtDate = next
+  ? new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long' }).format(next.date)
+  : '';
 ---
 
-<div class="announce-wrap">
-  <a
-    href="https://www.facebook.com/events/2219900218832999"
-    target="_blank"
-    rel="noopener"
-    class="announce"
-  >
-    <img
-      src="/flyers/deloreans_2026-08-14_hungary.jpeg"
-      alt="DeLoreans — Szepezdfürdői Strand show flyer"
-      class="announce__img"
-    />
-    <div class="announce__text">
-      <span class="announce__label">{t('announcement.label')}</span>
-      <span class="announce__detail">
-        {fmtDate} &middot; Szepezdfürdői Strand, {t('gigs.location.balatonszepezd')}
+{next && (
+  <div class="announce-wrap">
+    <a
+      href={next.url ?? '#gigs'}
+      class="announce"
+      {...(next.url ? { target: '_blank', rel: 'noopener' } : {})}
+    >
+      {next.flyer && (
+        <img
+          src={next.flyer}
+          alt={`DeLoreans — ${next.venue} show flyer`}
+          class="announce__img"
+        />
+      )}
+      <div class="announce__text">
+        <span class="announce__label">{t('announcement.label')}</span>
+        <span class="announce__detail">
+          {fmtDate} &middot; {next.venue}, {t(next.cityKey)}
+        </span>
+      </div>
+      <span class="announce__cta">
+        {next.url ? t('gigs.tickets') : t('gigs.contact')} &rarr;
       </span>
-    </div>
-    <span class="announce__cta">{t('gigs.tickets')} &rarr;</span>
-  </a>
-</div>
+    </a>
+  </div>
+)}
 
 <style>
   .announce-wrap {

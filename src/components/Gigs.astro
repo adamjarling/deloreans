@@ -14,6 +14,14 @@ const fmt = (date: Date) =>
 
 const fmtDay = (date: Date) =>
   new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(date);
+
+/* '20:00' renders as "20:00" in de/hu and "8:00 PM" in en. */
+const fmtTime = (date: Date, time: string) => {
+  const [h, m] = time.split(':').map(Number);
+  const d = new Date(date);
+  d.setHours(h, m, 0, 0);
+  return new Intl.DateTimeFormat(lang, { hour: 'numeric', minute: '2-digit' }).format(d);
+};
 ---
 
 <section class="gigs" id="gigs">
@@ -32,6 +40,11 @@ const fmtDay = (date: Date) =>
               <div class="gig-card__date">
                 <span class="gig-card__day">{fmtDay(gig.date)}</span>
                 <span class="gig-card__full">{fmt(gig.date)}</span>
+                {gig.time && (
+                  <span class="gig-card__time">
+                    {t('gigs.starts')} {fmtTime(gig.date, gig.time)}
+                  </span>
+                )}
               </div>
               <div class="gig-card__divider" />
               <div class="gig-card__info">
@@ -64,6 +77,11 @@ const fmtDay = (date: Date) =>
             <li class="gig-card gig-card--past">
               <div class="gig-card__date">
                 <span class="gig-card__full">{fmt(gig.date)}</span>
+                {gig.time && (
+                  <span class="gig-card__time">
+                    {t('gigs.starts')} {fmtTime(gig.date, gig.time)}
+                  </span>
+                )}
               </div>
               <div class="gig-card__divider" />
               <div class="gig-card__info">
@@ -216,6 +234,12 @@ const fmtDay = (date: Date) =>
 
   .gig-card--past .gig-card__venue {
     font-size: 1.1rem;
+  }
+
+  .gig-card__time {
+    font-size: 0.95rem;
+    color: var(--cyan);
+    letter-spacing: 0.06em;
   }
 
   .gig-card__city {

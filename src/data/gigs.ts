@@ -7,6 +7,8 @@ export interface Gig {
   cityKey: TranslationKey;
   url: string | null;
   flyer: string | null;
+  /** Local start time as 'HH:MM' (24h). Omitted when not yet confirmed. */
+  time?: string;
 }
 
 /**
@@ -35,6 +37,7 @@ export const gigs: Gig[] = [
     cityKey: 'gigs.location.vienna',
     url: null,
     flyer: '/flyers/deloreans_2026-05-23_quattro.jpeg',
+    time: '20:00', // per flyer: "MUSIC STARTS AT 20:00"
   },
   {
     date: new Date('2026-06-27'),
@@ -58,7 +61,18 @@ export const gigs: Gig[] = [
     url: null,
     flyer: '/flyers/deloreans_hungary_2026.jpg',
   },
+  {
+    date: new Date('2026-09-19'),
+    venue: 'Club Quattro',
+    cityKey: 'gigs.location.vienna',
+    url: null,
+    flyer: null,
+    time: '20:00',
+  },
 ];
 
-export const upcomingGigs = (now = new Date()) => gigs.filter(g => g.date >= now);
-export const pastGigs = (now = new Date()) => gigs.filter(g => g.date < now);
+const endOfDay = (d: Date) =>
+  new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
+
+export const upcomingGigs = (now = new Date()) => gigs.filter(g => endOfDay(g.date) >= now);
+export const pastGigs = (now = new Date()) => gigs.filter(g => endOfDay(g.date) < now);
