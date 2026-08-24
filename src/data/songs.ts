@@ -71,28 +71,3 @@ export const artistsByCount: { artist: string; count: number }[] = (() => {
 })();
 
 export const artistCount = artistsByCount.length;
-
-/**
- * The marquee names for the Contact teaser — every artist with 2+ songs,
- * hand-ordered for draw rather than strictly by count. Reorder freely; the
- * build asserts each one actually appears in `songs`.
- */
-export const headliners: string[] = [
-  'Bon Jovi',
-  'Queen',
-  'Billy Idol',
-  'Bruce Springsteen',
-  'Guns N\' Roses',
-  'Bryan Adams',
-  'Whitesnake',
-  'Eric Clapton',
-  'U2',
-];
-
-if (import.meta.env.DEV) {
-  const known = new Set(songs.map((s) => s.artist));
-  const unknown = headliners.filter((h) => !known.has(h));
-  if (unknown.length) {
-    throw new Error(`headliners not in catalog: ${unknown.join(', ')}`);
-  }
-}

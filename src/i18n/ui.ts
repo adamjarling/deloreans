@@ -100,8 +100,6 @@ export const ui = {
     'contact.title.1': 'Invite the',
     'contact.title.2': 'Time Travelers',
     'contact.body': 'DeLoreans are available to play clubs, pubs, private events, and festivals. Get in touch and let\'s take your audience back to when music was still awesome.',
-    'contact.repertoire': 'Repertoire Includes',
-    'contact.more': '& many more',
     'contact.tagline': 'Acoustic Time Travel',
     'contact.footer': '© {year} DeLoreans · Vienna, Austria',
 
@@ -298,8 +296,6 @@ export const ui = {
     'contact.title.1': 'Ladet die',
     'contact.title.2': 'Zeitreisenden ein',
     'contact.body': 'DeLoreans ist buchbar für Clubs, Pubs, private Veranstaltungen und Festivals. Melde dich – und lass uns dein Publikum dorthin zurückbringen, wo die Musik noch großartig war.',
-    'contact.repertoire': 'Repertoire (Auswahl)',
-    'contact.more': '& vieles mehr',
     'contact.tagline': 'Akustische Zeitreise',
     'contact.footer': '© {year} DeLoreans · Wien, Österreich',
 
@@ -496,8 +492,6 @@ export const ui = {
     'contact.title.1': 'Hívd meg',
     'contact.title.2': 'az időutazókat',
     'contact.body': 'DeLoreans elérhető klubokba, pubokba, magánrendezvényekre és fesztiválokra. Vedd fel velünk a kapcsolatot, és mi visszarepítjük a közönségedet abba a korba, amikor a zene még igazi volt.',
-    'contact.repertoire': 'Mit játszunk?',
-    'contact.more': 'és még sok más',
     'contact.tagline': 'Akusztikus időutazás',
     'contact.footer': '© {year} DeLoreans · Bécs, Ausztria',
 

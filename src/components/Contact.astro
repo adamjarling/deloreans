@@ -1,6 +1,5 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { headliners } from '../data/songs';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,34 +17,22 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     </div>
 
     <div class="container">
-      <div class="contact__grid">
+      <div class="contact__book">
+        <p class="section-label">{t('contact.label')}</p>
+        <h2 class="section-title">{t('contact.title.1')}<br/>{t('contact.title.2')}</h2>
+        <div class="neon-line"></div>
+        <p class="contact__body">{t('contact.body')}</p>
 
-        <div class="contact__book">
-          <p class="section-label">{t('contact.label')}</p>
-          <h2 class="section-title">{t('contact.title.1')}<br/>{t('contact.title.2')}</h2>
-          <div class="neon-line"></div>
-          <p class="contact__body">{t('contact.body')}</p>
-
-          <div class="contact__links">
-            <a href="mailto:deloreans.official@gmail.com" class="contact__item">
-              <span class="contact__icon">✉</span>
-              <span>deloreans.official@gmail.com</span>
-            </a>
-            <a href="https://deloreans.at" class="contact__item">
-              <span class="contact__icon">🌐</span>
-              <span>deloreans.at</span>
-            </a>
-          </div>
+        <div class="contact__links">
+          <a href="mailto:deloreans.official@gmail.com" class="contact__item">
+            <span class="contact__icon">✉</span>
+            <span>deloreans.official@gmail.com</span>
+          </a>
+          <a href="https://deloreans.at" class="contact__item">
+            <span class="contact__icon">🌐</span>
+            <span>deloreans.at</span>
+          </a>
         </div>
-
-        <div class="contact__repertoire">
-          <p class="section-label">{t('contact.repertoire')}</p>
-          <ul class="setlist">
-            {headliners.map((artist) => <li>{artist}</li>)}
-            <li><a href="#songs" class="setlist__more">{t('contact.more')}</a></li>
-          </ul>
-        </div>
-
       </div>
     </div>
 
@@ -120,11 +107,9 @@ const footerText = t('contact.footer').replace('{year}', String(year));
     filter: drop-shadow(0 0 20px rgba(255,20,147,0.4));
   }
 
-  .contact__grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--space-6);
-    align-items: start;
+  .contact__book {
+    max-width: 640px;
+    margin: 0 auto;
   }
 
   .contact__body {
@@ -160,43 +145,6 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   }
 
 
-  /* Setlist */
-  .setlist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
-  }
-
-  .setlist li {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding-bottom: var(--space-2);
-    transition: color 0.2s;
-  }
-  .setlist li:hover {
-    color: var(--white);
-    text-shadow: 0 0 12px var(--cyan);
-  }
-  .setlist li:last-child {
-    border-bottom: none;
-  }
-
-  .setlist__more {
-    font-family: inherit;
-    font-size: inherit;
-    letter-spacing: inherit;
-    color: var(--pink);
-    transition: text-shadow 0.2s;
-  }
-  .setlist__more:hover {
-    color: var(--pink);
-    text-shadow: 0 0 12px var(--pink);
-  }
 
   /* Footer bar */
   .contact__footer {
@@ -250,10 +198,6 @@ const footerText = t('contact.footer').replace('{year}', String(year));
   }
 
   @media (max-width: 768px) {
-    .contact__grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-5);
-    }
     .contact__footer {
       flex-direction: column;
       gap: var(--space-3);
