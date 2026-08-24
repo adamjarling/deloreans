@@ -54,17 +54,26 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   </div>
 
   <nav class="hero__nav">
-    <a href="#about">{t('nav.about')}</a>
-    <a href="#watch">{t('nav.watch')}</a>
-    <a href="#songs">{t('nav.songs')}</a>
-    <a href="#gigs">{t('nav.gigs')}</a>
-    <a href="#photos">{t('nav.photos')}</a>
-    <a href="#contact">{t('nav.contact')}</a>
-    <a href={getRelativeLocaleUrl(lang, '/epk')}>{t('nav.epk')}</a>
-    <div class="hero__lang">
-      {otherLangs.map(([code, label]) => (
-        <a href={getRelativeLocaleUrl(code, '/')} class="lang-link">{label}</a>
-      ))}
+    <input type="checkbox" id="nav-toggle" class="hero__nav-toggle" />
+    <label for="nav-toggle" class="hero__burger" aria-label={t('nav.menu')} aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="hero__nav-links">
+      <a href="#about">{t('nav.about')}</a>
+      <a href="#watch">{t('nav.watch')}</a>
+      <a href="#songs">{t('nav.songs')}</a>
+      <a href="#gigs">{t('nav.gigs')}</a>
+      <a href="#photos">{t('nav.photos')}</a>
+      <a href="#contact">{t('nav.contact')}</a>
+      <a href={getRelativeLocaleUrl(lang, '/epk')}>{t('nav.epk')}</a>
+      <div class="hero__lang">
+        {otherLangs.map(([code, label]) => (
+          <a href={getRelativeLocaleUrl(code, '/')} class="lang-link">{label}</a>
+        ))}
+      </div>
     </div>
   </nav>
 
@@ -234,17 +243,37 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     z-index: 10;
     display: flex;
     align-items: center;
+  }
+
+  /* Checkbox drives the mobile panel via :checked — kept in the tab order
+     (not display:none) so keyboard users can reach it, but visually and
+     spatially removed since the label is the actual click target. */
+  .hero__nav-toggle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .hero__burger {
+    display: none;
+  }
+
+  .hero__nav-links {
+    display: flex;
+    align-items: center;
     gap: var(--space-5);
   }
 
-  .hero__nav a {
+  .hero__nav-links a {
     font-family: var(--font-display);
     font-size: 1.15rem;
     letter-spacing: 0.13em;
     color: var(--muted);
     transition: color 0.2s;
   }
-  .hero__nav a:hover {
+  .hero__nav-links a:hover {
     color: var(--pink);
     text-shadow: 0 0 12px var(--pink);
   }
@@ -351,24 +380,89 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
       left: 0;
       right: 0;
       width: 100%;
-      padding: var(--space-2) var(--space-4);
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--space-1) var(--space-4);
+      justify-content: flex-end;
+      padding: var(--space-3) var(--space-4);
       background: rgba(10, 10, 15, 0.88);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
 
-    .hero__nav a {
-      font-size: 1rem;
+    /* Hamburger icon */
+    .hero__burger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 30px;
+      height: 24px;
+      cursor: pointer;
+      z-index: 11;
+    }
+
+    .hero__burger span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    /* Focus ring on the label when the hidden checkbox is keyboard-focused */
+    .hero__nav-toggle:focus-visible ~ .hero__burger {
+      outline: 2px solid var(--cyan);
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
+
+    /* Morph into an X when open */
+    .hero__nav-toggle:checked ~ .hero__burger span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hero__nav-toggle:checked ~ .hero__burger span:nth-child(2) {
+      opacity: 0;
+    }
+    .hero__nav-toggle:checked ~ .hero__burger span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Dropdown panel, collapsed by default */
+    .hero__nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 0 var(--space-4);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(10, 10, 15, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    }
+
+    .hero__nav-toggle:checked ~ .hero__nav-links {
+      max-height: 80svh;
+      opacity: 1;
+      pointer-events: auto;
+      overflow-y: auto;
+      padding: var(--space-4);
+    }
+
+    .hero__nav-links a {
+      font-size: 1.1rem;
     }
 
     .hero__lang {
       border-left: none;
       padding-left: 0;
       margin-left: 0;
-      padding-top: 4px;
+      padding-top: var(--space-2);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       width: 100%;
       justify-content: center;
@@ -380,3 +474,31 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     }
   }
 </style>
+
+<script>
+  // Close the mobile nav panel after picking a link (it's an anchor-scroll
+  // page, so nothing else would ever uncheck the box) or on Escape.
+  const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+  const burger = document.querySelector('.hero__burger');
+  const navLinks = document.querySelector('.hero__nav-links');
+
+  const syncExpanded = () => {
+    burger?.setAttribute('aria-expanded', String(!!toggle?.checked));
+  };
+
+  toggle?.addEventListener('change', syncExpanded);
+
+  navLinks?.addEventListener('click', (event) => {
+    if (toggle && (event.target as HTMLElement).closest('a')) {
+      toggle.checked = false;
+      syncExpanded();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle) {
+      toggle.checked = false;
+      syncExpanded();
+    }
+  });
+</script>

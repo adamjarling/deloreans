@@ -26,6 +26,7 @@ export const ui = {
     'nav.photos': 'Photos',
     'nav.songs': 'Songs',
     'nav.contact': 'Contact',
+    'nav.menu': 'Menu',
 
     // About
     'about.label': 'The Band',
@@ -223,6 +224,7 @@ export const ui = {
     'nav.photos': 'Fotos',
     'nav.songs': 'Songs',
     'nav.contact': 'Kontakt',
+    'nav.menu': 'Menü',
 
     // About
     'about.label': 'Die Band',
@@ -420,6 +422,7 @@ export const ui = {
     'nav.photos': 'Fotók',
     'nav.songs': 'Dalok',
     'nav.contact': 'Kapcsolat',
+    'nav.menu': 'Menü',
 
     // About
     'about.label': 'A zenekar',
