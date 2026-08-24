@@ -326,8 +326,35 @@ const fmtTime = (date: Date, time: string) => {
       height: 150px;
     }
 
+    /* Past shows: pair the flyer thumbnail with the date/venue text as two
+       columns instead of stacking everything full-width — with a dozen-plus
+       past gigs, the all-stacked layout made for a lot of scrolling. */
+    .gig-card--past {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      column-gap: var(--space-4);
+      row-gap: 2px;
+    }
+
+    .gig-card--past .gig-card__date {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .gig-card--past .gig-card__info {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .gig-card--past .gig-card__flyer-link--past {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
     .gig-card__flyer--past {
-      height: 120px;
+      width: 84px;
+      height: auto;
     }
   }
 </style>
