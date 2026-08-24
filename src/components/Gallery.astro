@@ -201,6 +201,14 @@ const photos = [
     transform: scale(1.03);
   }
 
+  /* Touch devices can't hover, so the desaturated resting state would be
+     permanent — show full color straight away instead. */
+  @media (hover: none) {
+    .gallery__item img {
+      filter: contrast(1.05);
+    }
+  }
+
   .gallery__item:focus-visible {
     outline: 2px solid var(--pink);
     outline-offset: -2px;

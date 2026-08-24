@@ -15,17 +15,17 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
 
   <div class="hero__inner">
     <!--
-      Split layout rather than a background image: the promo shot is portrait 2:3,
-      so full-bleed `cover` would upscale a 1024px-wide source ~1.9x on a desktop
-      monitor AND force body text on top of a busy neon photo. Beside it instead,
-      the photo renders near native size and every word sits on flat --bg.
+      Split layout rather than a background image: the photo is portrait 2:3,
+      so full-bleed `cover` would upscale a 1024px-wide source AND force body
+      text on top of a busy neon backdrop. Beside it instead, the photo
+      renders near native size and every word sits on flat --bg.
     -->
     <figure class="hero__media">
       <picture>
-        <source srcset="/images/deloreans_promo_2026-02.webp" type="image/webp" />
+        <source srcset="/images/zoltan_adam_80s_bg.webp" type="image/webp" />
         <img
-          src="/images/deloreans_promo_2026-02.jpg"
-          alt={t('gallery.alt.16')}
+          src="/images/zoltan_adam_80s_bg.jpg"
+          alt={t('gallery.alt.8')}
           class="hero__photo"
           width="1024"
           height="1536"
@@ -375,26 +375,64 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
   }
 
   @media (max-width: 640px) {
+    .hero {
+      padding-top: 0;
+    }
+
+    /* Full-bleed photo: break out of .hero's horizontal padding so it
+       reaches both screen edges instead of sitting in a boxed frame. */
+    .hero__media {
+      display: block;
+      width: calc(100% + 2 * var(--space-4));
+      margin: 0 calc(-1 * var(--space-4));
+    }
+
+    .hero__photo {
+      width: 100%;
+      height: 62svh;
+      max-height: none;
+      object-fit: cover;
+      object-position: center 22%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Swap the desktop card's inset glow for a fade into the page
+       background, so the full-bleed photo dissolves into the content
+       below rather than cutting off with a hard edge. */
+    .hero__media-frame {
+      inset: auto 0 0 0;
+      height: 40%;
+      border-radius: 0;
+      box-shadow: none;
+      background: linear-gradient(to bottom, transparent, var(--bg) 92%);
+    }
+
     .hero__nav {
       top: 0;
       left: 0;
       right: 0;
       width: 100%;
       justify-content: flex-end;
-      padding: var(--space-3) var(--space-4);
-      background: rgba(10, 10, 15, 0.88);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      padding: var(--space-4);
     }
 
-    /* Hamburger icon */
+    /* Hamburger icon — floats directly on the photo as a glass chip
+       rather than sitting in an opaque bar, so it reads on any part of
+       the image without drawing a hard line across the hero. */
     .hero__burger {
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 30px;
-      height: 24px;
+      width: 24px;
+      height: 16px;
+      padding: 11px;
+      box-sizing: content-box;
+      background: rgba(10, 10, 15, 0.55);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
       cursor: pointer;
       z-index: 11;
     }
@@ -426,28 +464,32 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
       transform: translateY(-7px) rotate(-45deg);
     }
 
-    /* Dropdown panel, collapsed by default */
+    /* Dropdown panel — fixed to the viewport (not just below the burger)
+       so it reliably covers the screen regardless of scroll position,
+       and collapsed by default. */
     .hero__nav-links {
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 0;
       left: 0;
       right: 0;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-3);
+      justify-content: center;
+      gap: var(--space-4);
       padding: 0 var(--space-4);
+      height: 0;
       max-height: 0;
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      background: rgba(10, 10, 15, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 15, 0.97);
+      backdrop-filter: blur(14px);
       transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
     }
 
     .hero__nav-toggle:checked ~ .hero__nav-links {
-      max-height: 80svh;
+      height: 100svh;
+      max-height: 100svh;
       opacity: 1;
       pointer-events: auto;
       overflow-y: auto;
@@ -455,7 +497,7 @@ const otherLangs = (Object.entries(languages) as [keyof typeof languages, string
     }
 
     .hero__nav-links a {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
     }
 
     .hero__lang {

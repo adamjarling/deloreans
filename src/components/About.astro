@@ -94,6 +94,14 @@ const t = useTranslations(lang);
     filter: grayscale(60%) contrast(1.1);
   }
 
+  /* Touch devices can't hover, so the desaturated resting state would be
+     permanent — show full color straight away instead. */
+  @media (hover: none) {
+    .about__photo {
+      filter: contrast(1.1);
+    }
+  }
+
   /* Pink neon border glow */
   .about__photo-glow {
     position: absolute;
