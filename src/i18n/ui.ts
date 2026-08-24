@@ -34,7 +34,6 @@ export const ui = {
     'about.p1': 'Two musicians born in the 1970s. One common obsession: the music of the 1980s. After meeting at a jam session in Vienna, Adam and Zoltan realized they shared a deep love for 80s rock — and a burning desire to bring it back, stripped down to two acoustic guitars and a whole lot of soul.',
     'about.p2': 'Classic hits from Bon Jovi, Whitesnake, Prince, and more — reimagined as if heard by a campfire on the beach. Raw, direct, and unforgettable.',
     'about.quote': '"80s Rock Hits — as if you were listening to it by a campfire on the beach."',
-    'about.photo.alt': 'DeLoreans performing live at Cafe Carina, Vienna',
     'adam.role': 'Guitar & Vocals',
     'adam.bio': 'Chicago-born guitarist and bassist. Alumni of Urge Overkill, The Last Vegas, and Warrior Soul — touring internationally for 20+ years, sharing stages with AC/DC, Guns N\' Roses, Mötley Crüe, and ZZ Top. Now rocking Vienna.',
     'zoltan.role': 'Vocals & Guitar',
@@ -94,6 +93,7 @@ export const ui = {
     'gallery.alt.15': 'Black and white photo of DeLoreans performing for a seated crowd',
     'gallery.alt.16': 'DeLoreans promo portrait with synthwave neon cityscape backdrop',
     'gallery.alt.17': 'Adam and Zoltan throwing rock hand signs at the bar',
+    'gallery.alt.18': 'DeLoreans performing live under a string-light curtain backdrop',
 
     // Contact
     'contact.label': 'Booking & Inquiries',
@@ -230,7 +230,6 @@ export const ui = {
     'about.p1': 'Zwei Musiker, geboren in den 1970er Jahren. Eine gemeinsame Leidenschaft: die Musik der 1980er. Nach einem Jam-Session-Treffen in Wien erkannten Adam und Zoltan, dass sie eine tiefe Liebe für 80er-Rock teilen – und den brennenden Wunsch, ihn zurückzubringen, reduziert auf zwei Akustikgitarren und jede Menge Seele.',
     'about.p2': 'Klassiker von Bon Jovi, Whitesnake, Prince und mehr – neu interpretiert, als würde man sie an einem Lagerfeuer am Strand hören. Roh, direkt und unvergesslich.',
     'about.quote': '"80er-Rock-Hits – als hättest du sie an einem Lagerfeuer am Strand gehört."',
-    'about.photo.alt': 'DeLoreans live im Cafe Carina, Wien',
     'adam.role': 'Gitarre & Gesang',
     'adam.bio': 'In Chicago geborener Gitarrist und Bassist. Ehemals bei Urge Overkill, The Last Vegas und Warrior Soul – über 20 Jahre internationale Tourneen, auf der Bühne neben AC/DC, Guns N\' Roses, Mötley Crüe und ZZ Top. Jetzt rockt er Wien.',
     'zoltan.role': 'Gesang & Gitarre',
@@ -290,6 +289,7 @@ export const ui = {
     'gallery.alt.15': 'Schwarz-Weiß-Foto von DeLoreans live vor sitzendem Publikum',
     'gallery.alt.16': 'DeLoreans-Promoporträt vor einer Synthwave-Neon-Skyline',
     'gallery.alt.17': 'Adam und Zoltan zeigen Rockerzeichen an der Bar',
+    'gallery.alt.18': 'DeLoreans live vor einem Lichtervorhang',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
@@ -426,7 +426,6 @@ export const ui = {
     'about.p1': 'Két zenész, akik az 1970-es években születtek, és közös megszállottságuk az 1980-as évek zenéje. Adam és Zoltán egy bécsi jam session-ön találkoztak és azonnal rájöttek, hogy nem csak imádják a 80-as évek rockzenéjét, de arra is vágynak, hogy visszahozzák ezt az időszakot, mindössze két gitárral és sok lélekkel.',
     'about.p2': 'A Bon Jovi, Whitesnake, Prince és mások klasszikus slágerei – újraálmodva, mintha tábortűz mellett hallanád őket a tengerparton. Nyers, közvetlen és felejthetetlen.',
     'about.quote': '"A 80-as évek rock slágerei – mintha tábortűz mellett hallgatnád a tengerparton."',
-    'about.photo.alt': 'DeLoreans élőben a Cafe Carina (Bécs) színpadán',
     'adam.role': 'Gitár & Ének',
     'adam.bio': 'Chicagóban született gitáros és basszusgitáros. Az Urge Overkill, The Last Vegas és Warrior Soul tagjaként 20+ éve turnézik világszerte, játszott az AC/DC, Guns N\' Roses, Mötley Crüe és ZZ Top előtt is. Jelenleg Bécs a főhadiszállása.',
     'zoltan.role': 'Ének & Gitár',
@@ -486,6 +485,7 @@ export const ui = {
     'gallery.alt.15': 'Fekete-fehér fotó a DeLoreansról, amint ülő közönség előtt játszanak',
     'gallery.alt.16': 'DeLoreans promóciós portré szintetikus neon városkép háttérrel',
     'gallery.alt.17': 'Adam és Zoltán rocker kézjelet mutat a bárnál',
+    'gallery.alt.18': 'A DeLoreans élőben egy fényfüggöny háttér előtt',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',
