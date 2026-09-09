@@ -66,8 +66,8 @@ export const gigs: Gig[] = [
     venue: 'Club Quattro',
     cityKey: 'gigs.location.vienna',
     url: null,
-    flyer: null,
-    time: '20:00',
+    flyer: '/flyers/deloreans_2026-09-19_quattro.jpg',
+    time: '20:00', // per flyer: "MUSIC STARTS AT 20:00"
   },
 ];
 
