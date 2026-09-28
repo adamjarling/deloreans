@@ -69,6 +69,15 @@ export const gigs: Gig[] = [
     flyer: '/flyers/deloreans_2026-09-19_quattro.jpg',
     time: '20:00', // per flyer: "MUSIC STARTS AT 20:00"
   },
+  {
+    date: new Date('2026-10-10'),
+    // Jungenberggasse 61, 1210 Wien
+    venue: "Tony's Buschenschank",
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.instagram.com/tonys_wines_naturalcrafts.at/',
+    flyer: null,
+    time: '18:00',
+  },
 ];
 
 const endOfDay = (d: Date) =>
