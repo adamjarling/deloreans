@@ -7,8 +7,8 @@ export interface Gig {
   cityKey: TranslationKey;
   url: string | null;
   flyer: string | null;
-  /** Local start time as 'HH:MM' (24h). Omitted when not yet confirmed. */
-  time?: string;
+  /** Local start time(s) as 'HH:MM' (24h). An array renders as multiple sets. Omitted when not yet confirmed. */
+  time?: string | string[];
 }
 
 /**
@@ -77,6 +77,42 @@ export const gigs: Gig[] = [
     url: 'https://www.instagram.com/tonys_wines_naturalcrafts.at/',
     flyer: null,
     time: '18:00',
+  },
+  {
+    date: new Date('2026-12-13'),
+    // Rock & Leiwand X-Mas Markt, Lastenstrasse 19, 1230 Wien. Two 30-min sets per day.
+    venue: 'Fassfabrik Wien-Liesing',
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.rockundleiwand.com/',
+    flyer: '/flyers/deloreans_rock-leiwand_2026.jpg',
+    time: ['16:30', '19:30'],
+  },
+  {
+    date: new Date('2026-12-18'),
+    // Rock & Leiwand X-Mas Markt, Lastenstrasse 19, 1230 Wien. Two 30-min sets per day.
+    venue: 'Fassfabrik Wien-Liesing',
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.rockundleiwand.com/',
+    flyer: '/flyers/deloreans_rock-leiwand_2026.jpg',
+    time: ['16:30', '19:30'],
+  },
+  {
+    date: new Date('2026-12-19'),
+    // Rock & Leiwand X-Mas Markt, Lastenstrasse 19, 1230 Wien. Two 30-min sets per day.
+    venue: 'Fassfabrik Wien-Liesing',
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.rockundleiwand.com/',
+    flyer: '/flyers/deloreans_rock-leiwand_2026.jpg',
+    time: ['16:30', '19:30'],
+  },
+  {
+    date: new Date('2026-12-20'),
+    // Rock & Leiwand X-Mas Markt, Lastenstrasse 19, 1230 Wien. Two 30-min sets per day.
+    venue: 'Fassfabrik Wien-Liesing',
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.rockundleiwand.com/',
+    flyer: '/flyers/deloreans_rock-leiwand_2026.jpg',
+    time: ['16:30', '19:30'],
   },
 ];
 

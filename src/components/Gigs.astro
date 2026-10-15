@@ -22,6 +22,12 @@ const fmtTime = (date: Date, time: string) => {
   d.setHours(h, m, 0, 0);
   return new Intl.DateTimeFormat(lang, { hour: 'numeric', minute: '2-digit' }).format(d);
 };
+
+/* Multiple sets (e.g. ['16:30', '19:30']) render as "16:30 and 19:30". */
+const fmtTimes = (date: Date, time: string | string[]) =>
+  (Array.isArray(time) ? time : [time])
+    .map(single => fmtTime(date, single))
+    .join(` ${t('gigs.and')} `);
 ---
 
 <section class="gigs" id="gigs">
@@ -34,15 +40,15 @@ const fmtTime = (date: Date, time: string) => {
       <div class="gigs__block">
         <h3 class="gigs__sub">{t('gigs.upcoming')}</h3>
         <ul class="gigs__list gigs__list--upcoming">
-          {upcoming.map(gig => (
+          {upcoming.map((gig, i) => (
             <li class="gig-card gig-card--upcoming">
-              <div class="gig-card__badge">NEXT SHOW</div>
+              {i === 0 && <div class="gig-card__badge">NEXT SHOW</div>}
               <div class="gig-card__date">
                 <span class="gig-card__day">{fmtDay(gig.date)}</span>
                 <span class="gig-card__full">{fmt(gig.date)}</span>
                 {gig.time && (
                   <span class="gig-card__time">
-                    {t('gigs.starts')} {fmtTime(gig.date, gig.time)}
+                    {t('gigs.starts')} {fmtTimes(gig.date, gig.time)}
                   </span>
                 )}
               </div>
@@ -79,7 +85,7 @@ const fmtTime = (date: Date, time: string) => {
                 <span class="gig-card__full">{fmt(gig.date)}</span>
                 {gig.time && (
                   <span class="gig-card__time">
-                    {t('gigs.starts')} {fmtTime(gig.date, gig.time)}
+                    {t('gigs.starts')} {fmtTimes(gig.date, gig.time)}
                   </span>
                 )}
               </div>

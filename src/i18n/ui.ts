@@ -68,7 +68,8 @@ export const ui = {
     'gigs.location.koveskal': 'Köveskál, Hungary',
     'gigs.contact': 'Contact us to book',
     'gigs.tickets': 'Tickets & Info',
-    'gigs.starts': 'Music starts',
+    'gigs.starts': 'Begin',
+    'gigs.and': 'and',
 
     // Announcement
     'announcement.label': 'Next Show',
@@ -265,6 +266,7 @@ export const ui = {
     'gigs.contact': 'Jetzt anfragen',
     'gigs.tickets': 'Tickets & Info',
     'gigs.starts': 'Beginn',
+    'gigs.and': 'und',
 
     // Announcement
     'announcement.label': 'Nächste Show',
@@ -461,6 +463,7 @@ export const ui = {
     'gigs.contact': 'Lépj velünk kapcsolatba',
     'gigs.tickets': 'Jegyek & info',
     'gigs.starts': 'Kezdés',
+    'gigs.and': 'és',
 
     // Announcement
     'announcement.label': 'Következő koncert',
