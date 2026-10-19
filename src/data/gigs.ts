@@ -114,6 +114,14 @@ export const gigs: Gig[] = [
     flyer: '/flyers/deloreans_rock-leiwand_2026.jpg',
     time: ['16:30', '19:30'],
   },
+  {
+    date: new Date('2027-01-30'),
+    // Simmeringer Hauptstraße 78, Wien-Simmering
+    venue: 'RockX Music and More',
+    cityKey: 'gigs.location.vienna',
+    url: 'https://www.rockx-music-and-more.com/',
+    flyer: null,
+  },
 ];
 
 const endOfDay = (d: Date) =>
