@@ -75,7 +75,7 @@ export const gigs: Gig[] = [
     venue: "Tony's Buschenschank",
     cityKey: 'gigs.location.vienna',
     url: 'https://www.instagram.com/tonys_wines_naturalcrafts.at/',
-    flyer: null,
+    flyer: '/flyers/deloreans_2026-10-10_tonys-buschenschank.jpg',
     time: '18:00',
   },
   {

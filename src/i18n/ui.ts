@@ -95,6 +95,7 @@ export const ui = {
     'gallery.alt.16': 'DeLoreans promo portrait with synthwave neon cityscape backdrop',
     'gallery.alt.17': 'Adam and Zoltan throwing rock hand signs at the bar',
     'gallery.alt.18': 'DeLoreans performing live under a string-light curtain backdrop',
+    'gallery.alt.19': 'Adam and Zoltan in front of Weingut Schilling with the DeLoreans gig poster',
 
     // Contact
     'contact.label': 'Booking & Inquiries',
@@ -292,6 +293,7 @@ export const ui = {
     'gallery.alt.16': 'DeLoreans-Promoporträt vor einer Synthwave-Neon-Skyline',
     'gallery.alt.17': 'Adam und Zoltan zeigen Rockerzeichen an der Bar',
     'gallery.alt.18': 'DeLoreans live vor einem Lichtervorhang',
+    'gallery.alt.19': 'Adam und Zoltan vor dem Weingut Schilling mit dem DeLoreans-Konzertplakat',
 
     // Contact
     'contact.label': 'Buchung & Anfragen',
@@ -489,6 +491,7 @@ export const ui = {
     'gallery.alt.16': 'DeLoreans promóciós portré szintetikus neon városkép háttérrel',
     'gallery.alt.17': 'Adam és Zoltán rocker kézjelet mutat a bárnál',
     'gallery.alt.18': 'A DeLoreans élőben egy fényfüggöny háttér előtt',
+    'gallery.alt.19': 'Adam és Zoltán a Weingut Schilling előtt a DeLoreans koncertplakátjával',
 
     // Contact
     'contact.label': 'Kontakt és koncertszervezés',

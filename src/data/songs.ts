@@ -20,7 +20,6 @@ export interface Song {
 }
 
 export const songs: Song[] = [
-  { title: 'Birthday', artist: 'The Beatles' },
   { title: 'Born to Be My Baby', artist: 'Bon Jovi' },
   { title: 'Can\'t Find My Way Home', artist: 'Blind Faith' },
   { title: 'Cocaine', artist: 'Eric Clapton' },

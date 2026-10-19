@@ -26,7 +26,7 @@ export const contact = {
 export const social = [
   { name: 'YouTube',   url: 'https://www.youtube.com/@DeLoreansOfficial' },
   { name: 'Facebook',  url: 'https://www.facebook.com/deloreansrock' },
-  { name: 'Instagram', url: null },       // TODO: add when the account exists
+  { name: 'Instagram', url: 'https://www.instagram.com/deloreansvienna/' },
   { name: 'Spotify',   url: null },       // TODO: if/when there are recordings
 ];
 
