@@ -14,7 +14,7 @@ const upcoming = upcomingGigs(now);
 const past = [...pastGigs(now)].reverse(); // most recent first for press
 
 const fmt = (date: Date) =>
-  new Intl.DateTimeFormat(lang, { day: '2-digit', month: 'short', year: 'numeric' }).format(date);
+  new Intl.DateTimeFormat(lang, { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date);
 ---
 <section class="epk-live" id="live">
   <div class="container">

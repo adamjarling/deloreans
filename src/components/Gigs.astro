@@ -10,17 +10,19 @@ const upcoming = upcomingGigs(now);
 const past = [...pastGigs(now)].reverse(); // most recent show first
 
 const fmt = (date: Date) =>
-  new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+  new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
 
 const fmtDay = (date: Date) =>
-  new Intl.DateTimeFormat(lang, { weekday: 'long' }).format(date);
+  new Intl.DateTimeFormat(lang, { weekday: 'long', timeZone: 'UTC' }).format(date);
 
+/* Dates are UTC-midnight calendar days and times are venue-local wall-clock,
+   so everything is formatted in UTC to render identically in any viewer/build zone. */
 /* '20:00' renders as "20:00" in de/hu and "8:00 PM" in en. */
 const fmtTime = (date: Date, time: string) => {
   const [h, m] = time.split(':').map(Number);
   const d = new Date(date);
-  d.setHours(h, m, 0, 0);
-  return new Intl.DateTimeFormat(lang, { hour: 'numeric', minute: '2-digit' }).format(d);
+  d.setUTCHours(h, m, 0, 0);
+  return new Intl.DateTimeFormat(lang, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(d);
 };
 
 /* Multiple sets (e.g. ['16:30', '19:30']) render as "16:30 and 19:30". */
